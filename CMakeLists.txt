@@ -15,7 +15,7 @@ target_include_directories(dropframes PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} /usr/l
 target_compile_features(dropframes PRIVATE cxx_std_17)
 
 
-add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp)
+add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp)
 target_compile_features(animtool PRIVATE cxx_std_17)
 target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} /usr/local/include)
 
