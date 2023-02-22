@@ -1,4 +1,7 @@
-#include "common/cli.h"
+#include "cli.h"
+
+#include "webp/encode.h"
+#include "gif_lib.h"
 
 
 int main(int argc, char *argv[]) {
@@ -6,6 +9,9 @@ int main(int argc, char *argv[]) {
         .name = "animtool",
         .desc = "A tool to process animated images."
     };
+
+    auto a = WebPEncodeRGB;
+    fprintf(stderr, "%p", a);
 
 //    cli::Cmd dropframes {};
 //    CmdDropFramesInit(&dropframes);
