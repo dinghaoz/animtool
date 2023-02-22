@@ -35,7 +35,7 @@
 #endif
 
 #include "./imageio_util.h"
-#include "../examples/unicode.h"
+#include "unicode.h"
 
 //------------------------------------------------------------------------------
 // PNG

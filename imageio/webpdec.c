@@ -22,7 +22,7 @@
 #include "webp/decode.h"
 #include "webp/demux.h"
 #include "webp/encode.h"
-#include "../examples/unicode.h"
+#include "unicode.h"
 #include "./imageio_util.h"
 #include "./metadata.h"
 

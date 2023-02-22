@@ -8,8 +8,8 @@
 #include "../imageio/imageio_util.h"
 #include "webp/demux.h"
 
-#include "defer.h"
 #include "check.h"
+#include "utils/defer.h"
 
 int WebPDecRunWithData(WebPData* webp_data, void* ctx, AnimDecRunCallback callback) {
     auto dec = WebPAnimDecoderNew(webp_data, nullptr);

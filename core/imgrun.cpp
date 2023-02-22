@@ -7,8 +7,8 @@
 #include "webp/encode.h"
 #include "webp/demux.h"
 
-#include "defer.h"
 #include "check.h"
+#include "utils/defer.h"
 
 int ImgDecRun(const char* file_path, void* ctx, AnimDecRunCallback callback) {
     WebPData webp_data;

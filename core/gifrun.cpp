@@ -7,11 +7,12 @@
 
 #include "webp/encode.h"
 #include "webp/mux.h"
-#include "../examples/gifdec.h"
+#include "imageio/gifdec.h"
 #include "check.h"
-#include "defer.h"
 #include "logger.h"
 #include "check_gif.h"
+
+#include "utils/defer.h"
 
 #ifdef HAVE_CONFIG_H
 #include "webp/config.h"

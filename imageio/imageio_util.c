@@ -18,7 +18,7 @@
 #endif
 #include <stdlib.h>
 #include <string.h>
-#include "../examples/unicode.h"
+#include "unicode.h"
 
 // -----------------------------------------------------------------------------
 // File I/O
