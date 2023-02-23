@@ -182,25 +182,25 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
         logger::level = logger::LOG_DEBUG;
     }
 
-    if (!WebPDropFrames(
-        cmd->GetFirstArg(),
-        cmd->GetStr("output"),
-        cmd->GetStr("output_dir"),
-        cmd->GetInt("frame_rate"),
-        cmd->GetInt("total_duration"),
-        cmd->GetInt("loop_count"),
+    if (!AnimToolDropFrames(
+            cmd->GetFirstArg(),
+            cmd->GetStr("output"),
+            cmd->GetStr("output_dir"),
+            cmd->GetInt("frame_rate"),
+            cmd->GetInt("total_duration"),
+            cmd->GetInt("loop_count"),
 
-        cmd->GetBool("minimize_size"),
-        verbose,
+            cmd->GetBool("minimize_size"),
+            verbose,
 
-        cmd->GetBool("lossless"),
-        cmd->GetFloat("quality"),
-        cmd->GetInt("method"),
-        cmd->GetInt("pass"),
+            cmd->GetBool("lossless"),
+            cmd->GetFloat("quality"),
+            cmd->GetInt("method"),
+            cmd->GetInt("pass"),
 
-        n_transforms,
-        transforms
-        )) {
+            n_transforms,
+            transforms
+    )) {
         return cli::ACTION_FAILED;
     }
 

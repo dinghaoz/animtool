@@ -7,7 +7,7 @@
 
 #include "webp/encode.h"
 #include "webp/mux.h"
-#include "imageio/gifdec.h"
+#include "../examples/gifdec.h"
 #include "check.h"
 #include "logger.h"
 #include "check_gif.h"

@@ -526,7 +526,7 @@ static const char* GetGravityStr(int gravities) {
     }
 }
 
-int WebPDropFrames(
+int AnimToolDropFrames(
     const char* const input,
     const char* const output,
     const char* const output_dir,
@@ -551,7 +551,7 @@ int WebPDropFrames(
     WebPDataInit(&webp_data);
     defer(WebPDataClear(&webp_data));
 
-    logger::i("Start WebPDropFrames");
+    logger::i("Start AnimToolDropFrames");
     logger::i("    input: %s", input);
     logger::i("    output: %s", output);
     logger::i("    output_dir: %s", output_dir);
@@ -619,11 +619,11 @@ int WebPDropFrames(
         }
     }
 
-    logger::i("End WebPDropFrames: %d->%d", ctx.in_frame_count, ctx.out_frame_count);
+    logger::i("End AnimToolDropFrames: %d->%d", ctx.in_frame_count, ctx.out_frame_count);
     return 1;
 }
 
-int WebPDropFramesLite(
+int AnimToolDropFramesLite(
     const char* const input,
     const char* const output,
     int target_frame_rate,
@@ -656,24 +656,24 @@ int WebPDropFramesLite(
         }}
     };
 
-    return WebPDropFrames(
-        input,
-        output,
-        nullptr,
-        target_frame_rate,
-        target_total_duration,
-        loop_count,
+    return AnimToolDropFrames(
+            input,
+            output,
+            nullptr,
+            target_frame_rate,
+            target_total_duration,
+            loop_count,
 
-        0, // minimize_size
-        0, // verbose
+            0, // minimize_size
+            0, // verbose
 
-        0, // lossless
-        75.0f, // quality
-        0, // method
-        1, // pass
-    
-        1,
-        &transform
+            0, // lossless
+            75.0f, // quality
+            0, // method
+            1, // pass
+
+            1,
+            &transform
     );
 }
 

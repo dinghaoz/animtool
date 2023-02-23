@@ -58,7 +58,7 @@ typedef struct FrameTransform {
 } FrameTransform;
 
 
-int WebPDropFrames(
+int AnimToolDropFrames(
     const char* const input,
     const char* const output,
     const char* const output_dir,
@@ -80,7 +80,7 @@ int WebPDropFrames(
     const FrameTransform transforms[MAX_N_TRANSFORMS]
 );
 
-int WebPDropFramesLite(
+int AnimToolDropFramesLite(
     const char* const input,
     const char* const output,
     int target_frame_rate, // 0 means don't drop frames
