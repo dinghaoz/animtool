@@ -6,18 +6,40 @@ project(animtool C CXX)
 add_library(imageioutil STATIC imageio/gifdec.c imageio/image_dec.c imageio/image_enc.c imageio/imageio_util.c imageio/jpegdec.c imageio/pngdec.c imageio/tiffdec.c imageio/webpdec.c imageio/wicdec.c imageio/metadata.c imageio/pnmdec.c)
 target_include_directories(imageioutil PRIVATE /usr/local/include)
 
-add_library(dropframes STATIC core/dropframes.cpp core/animenc.cpp core/webprun.cpp core/filefmt.cpp core/animrun.cpp core/gifrun.cpp core/imgrun.cpp)
-find_library(WEBPMUX_LIB webpmux)
-find_library(WEBPDEMUX_LIB webpdemux)
+if(ANDROID)
+include(CPM.cmake)
+CPMAddPackage(NAME webp
+        URL https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.3.0.tar.gz
+        URL_HASH SHA1=49da8782aeedab8779bb2bc1a3f24bf02807e8ee
+        OPTIONS
+        "WEBP_BUILD_ANIM_UTILS OFF"
+        "WEBP_BUILD_CWEBP OFF"
+        "WEBP_BUILD_DWEBP OFF"
+        "WEBP_BUILD_GIF2WEBP OFF"
+        "WEBP_BUILD_IMG2WEBP OFF"
+        "WEBP_BUILD_VWEBP OFF"
+        "WEBP_BUILD_WEBPINFO OFF"
+        "WEBP_BUILD_WEBPMUX OFF"
+        "WEBP_BUILD_EXTRAS OFF"
+        )
+else()
+    find_library(WEBPMUX_LIB webpmux REQUIRED)
+    find_library(WEBPDEMUX_LIB webpdemux REQUIRED)
+    find_package(GIF REQUIRED)
+endif()
 
-target_link_libraries(dropframes imageioutil ${WEBPMUX_LIB} ${WEBPDEMUX_LIB})
+
+add_definitions(-DWEBP_HAVE_GIF)
+
+add_library(dropframes STATIC core/dropframes.cpp core/animenc.cpp core/webprun.cpp core/filefmt.cpp core/animrun.cpp core/gifrun.cpp core/imgrun.cpp core/quantizer.cpp)
+
+target_link_libraries(dropframes imageioutil ${WEBPMUX_LIB} ${WEBPDEMUX_LIB} ${GIF_LIBRARIES})
 target_include_directories(dropframes PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} /usr/local/include)
 target_compile_features(dropframes PRIVATE cxx_std_17)
-
 
 add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp)
 target_compile_features(animtool PRIVATE cxx_std_17)
 target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} /usr/local/include)
 
 find_library(WEBP_LIB webp)
-target_link_libraries(animtool dropframes imageioutil ${WEBP_LIB} ${WEBPMUX_LIB} ${WEBPDEMUX_LIB})
+target_link_libraries(animtool dropframes imageioutil ${WEBP_LIB} ${WEBPMUX_LIB} ${WEBPDEMUX_LIB} ${GIF_LIBRARIES})

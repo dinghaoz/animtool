@@ -13,7 +13,7 @@
 
 #ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"
-#include "../examples/gifdec.h"
+#include "imageio/gifdec.h"
 
 enum {
     METADATA_ICC  = (1 << 0),

@@ -17,7 +17,7 @@
 
 #ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"
-#include "gifcompat.h"
+#include "core/gifcompat.h"
 #endif
 
 #include "core/logger.h"
