@@ -20,9 +20,9 @@
 #include "gif_lib.h"
 #endif
 
-#include "defer.h"
 #include "check.h"
 #include "logger.h"
+#include "utils/defer.h"
 
 #include <cstdlib>
 #include <cstring>

@@ -13,7 +13,7 @@
 
 
 #include "check.h"
-#include "defer.h"
+#include "utils/defer.h"
 
 int AnimToolAnimate(
         const char* const image_paths[],

@@ -4,9 +4,9 @@
 
 #include "animate_cmd.h"
 #include "cli.h"
-#include "animate.h"
+#include "core/animate.h"
 
-#include "logger.h"
+#include "core/logger.h"
 
 
 static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli::StrBuilder& error) {
