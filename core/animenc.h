@@ -26,7 +26,7 @@ struct AnimFrameOptions {
 typedef struct WebPPicture WebPPicture;
 
 
-AnimEncoder* AnimEncoderNew(const char* format, int cavas_width, int canvas_height, const AnimEncoderOptions* options);
+AnimEncoder* AnimEncoderNew(const char* format, int canvas_width, int canvas_height, const AnimEncoderOptions* options);
 int AnimEncoderAddFrame(AnimEncoder* encoder, WebPPicture* pic, int start_ts, int end_ts, const AnimFrameOptions* options);
 int AnimEncoderExport(AnimEncoder* encoder, int final_ts, int loop_count, const char* output_path);
 const char* AnimEncoderGetFileExt(const AnimEncoder* encoder);

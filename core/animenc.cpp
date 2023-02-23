@@ -20,9 +20,9 @@
 #include "gif_lib.h"
 #endif
 
+#include "defer.h"
 #include "check.h"
 #include "logger.h"
-#include "utils/defer.h"
 
 #include <cstdlib>
 #include <cstring>
@@ -377,6 +377,8 @@ private:
 #endif
 
 AnimEncoder* AnimEncoderNew(const char* format, int canvas_width, int canvas_height, const AnimEncoderOptions* options) {
+    require(format);
+
     AnimEncoder* encoder = 0;
 
     if (!strcasecmp(format, "webp") || strlen(format) == 0) {
