@@ -2,13 +2,11 @@ cmake_minimum_required(VERSION 3.7)
 
 project(animtool C CXX)
 
+set(CMAKE_CXX_STANDARD 17)
 
-add_library(imageioutil STATIC imageio/gifdec.c imageio/image_dec.c imageio/image_enc.c imageio/imageio_util.c imageio/jpegdec.c imageio/pngdec.c imageio/tiffdec.c imageio/webpdec.c imageio/wicdec.c imageio/metadata.c imageio/pnmdec.c)
-target_include_directories(imageioutil PRIVATE /usr/local/include)
-
-if(ANDROID)
-include(CPM.cmake)
+include(cmake/CPM.cmake)
 CPMAddPackage(NAME webp
+        VERSION 1.3.0
         URL https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.3.0.tar.gz
         URL_HASH SHA1=49da8782aeedab8779bb2bc1a3f24bf02807e8ee
         OPTIONS
@@ -22,24 +20,55 @@ CPMAddPackage(NAME webp
         "WEBP_BUILD_WEBPMUX OFF"
         "WEBP_BUILD_EXTRAS OFF"
         )
-else()
-    find_library(WEBPMUX_LIB webpmux REQUIRED)
-    find_library(WEBPDEMUX_LIB webpdemux REQUIRED)
-    find_package(GIF REQUIRED)
-endif()
 
+CPMAddPackage(NAME gif
+        VERSION 5.2.1
+        URL https://onboardcloud.dl.sourceforge.net/project/giflib/giflib-5.2.1.tar.gz
+        URL_HASH SHA1=c3f774dcbdf26afded7788979c8081d33c6426dc
+        )
+
+
+add_library(giflib STATIC
+        ${gif_SOURCE_DIR}/dgif_lib.c
+        ${gif_SOURCE_DIR}/egif_lib.c
+        ${gif_SOURCE_DIR}/gifalloc.c
+        ${gif_SOURCE_DIR}/gif_err.c
+        ${gif_SOURCE_DIR}/gif_hash.c
+        ${gif_SOURCE_DIR}/openbsd-reallocarray.c
+        ${gif_SOURCE_DIR}/quantize.c
+        )
 
 add_definitions(-DWEBP_HAVE_GIF)
 
-add_library(dropframes STATIC core/dropframes.cpp core/animenc.cpp core/webprun.cpp core/filefmt.cpp core/animrun.cpp core/gifrun.cpp core/imgrun.cpp core/quantizer.cpp)
+add_library(webp_imageio STATIC
+        ${webp_SOURCE_DIR}/examples/gifdec.c
+        ${webp_SOURCE_DIR}/imageio/image_dec.c
+        ${webp_SOURCE_DIR}/imageio/image_enc.c
+        ${webp_SOURCE_DIR}/imageio/imageio_util.c
+        ${webp_SOURCE_DIR}/imageio/jpegdec.c
+        ${webp_SOURCE_DIR}/imageio/pngdec.c
+        ${webp_SOURCE_DIR}/imageio/tiffdec.c
+        ${webp_SOURCE_DIR}/imageio/webpdec.c
+        ${webp_SOURCE_DIR}/imageio/wicdec.c
+        ${webp_SOURCE_DIR}/imageio/metadata.c
+        ${webp_SOURCE_DIR}/imageio/pnmdec.c
+        )
+target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 
-target_link_libraries(dropframes imageioutil ${WEBPMUX_LIB} ${WEBPDEMUX_LIB} ${GIF_LIBRARIES})
-target_include_directories(dropframes PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} /usr/local/include)
-target_compile_features(dropframes PRIVATE cxx_std_17)
+
+
+add_library(dropframes STATIC
+        core/dropframes.cpp
+        core/animenc.cpp
+        core/webprun.cpp
+        core/filefmt.cpp
+        core/animrun.cpp
+        core/gifrun.cpp
+        core/imgrun.cpp
+        core/quantizer.cpp)
+target_include_directories(dropframes PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 
 add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp)
-target_compile_features(animtool PRIVATE cxx_std_17)
-target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} /usr/local/include)
+target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 
-find_library(WEBP_LIB webp)
-target_link_libraries(animtool dropframes imageioutil ${WEBP_LIB} ${WEBPMUX_LIB} ${WEBPDEMUX_LIB} ${GIF_LIBRARIES})
+target_link_libraries(animtool dropframes webp_imageio webp libwebpmux webpdemux giflib)
