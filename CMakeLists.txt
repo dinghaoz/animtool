@@ -52,6 +52,15 @@ if(PNG_FOUND)
     list(APPEND IMAGE_CODEC_LIBRARIES ${PNG_LIBRARIES})
 endif()
 
+
+find_package(JPEG)
+
+if(JPEG_FOUND)
+    add_definitions(-DWEBP_HAVE_JPEG)
+    list(APPEND IMAGE_CODEC_INCLUDE_DIRS ${JPEG_INCLUDE_DIR})
+    list(APPEND IMAGE_CODEC_LIBRARIES ${JPEG_LIBRARIES})
+endif()
+
 add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/examples/gifdec.c
         ${webp_SOURCE_DIR}/imageio/image_dec.c
