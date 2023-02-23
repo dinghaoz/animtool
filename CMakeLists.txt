@@ -88,8 +88,9 @@ add_library(animtoolcore STATIC
         core/imgrun.cpp
         core/quantizer.cpp)
 target_include_directories(animtoolcore PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
+target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux giflib ${IMAGE_CODEC_LIBRARIES})
 
 add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp app/animate_cmd.cpp)
 target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 
-target_link_libraries(animtool animtoolcore webp_imageio webp libwebpmux webpdemux giflib ${IMAGE_CODEC_LIBRARIES})
+target_link_libraries(animtool animtoolcore)
