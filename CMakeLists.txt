@@ -38,7 +38,19 @@ add_library(giflib STATIC
         ${gif_SOURCE_DIR}/quantize.c
         )
 
+
 add_definitions(-DWEBP_HAVE_GIF)
+
+set(IMAGE_CODEC_LIBRARIES)
+set(IMAGE_CODEC_INCLUDE_DIRS)
+
+find_package(PNG)
+
+if(PNG_FOUND)
+    add_definitions(-DWEBP_HAVE_PNG)
+    list(APPEND IMAGE_CODEC_INCLUDE_DIRS ${PNG_INCLUDE_DIR})
+    list(APPEND IMAGE_CODEC_LIBRARIES ${PNG_LIBRARIES})
+endif()
 
 add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/examples/gifdec.c
@@ -53,8 +65,7 @@ add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/imageio/metadata.c
         ${webp_SOURCE_DIR}/imageio/pnmdec.c
         )
-target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
-
+target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR} ${IMAGE_CODEC_INCLUDE_DIRS})
 
 
 add_library(dropframes STATIC
@@ -71,4 +82,4 @@ target_include_directories(dropframes PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp
 add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp)
 target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 
-target_link_libraries(animtool dropframes webp_imageio webp libwebpmux webpdemux giflib)
+target_link_libraries(animtool dropframes webp_imageio webp libwebpmux webpdemux giflib ${IMAGE_CODEC_LIBRARIES})
