@@ -27,6 +27,12 @@ CPMAddPackage(NAME gif
         URL_HASH SHA1=c3f774dcbdf26afded7788979c8081d33c6426dc
         )
 
+CPMAddPackage(NAME jpeg
+        VERSION 1.2.1
+        URL https://github.com/csparker247/jpeg-cmake/archive/refs/tags/v1.2.1.tar.gz
+        URL_HASH SHA1=b7a593d62702c0bba32cb1878ddf04dc10b672f6
+        )
+
 
 add_library(giflib STATIC
         ${gif_SOURCE_DIR}/dgif_lib.c
@@ -40,6 +46,7 @@ add_library(giflib STATIC
 
 
 add_definitions(-DWEBP_HAVE_GIF)
+add_definitions(-DWEBP_HAVE_JPEG)
 
 set(IMAGE_CODEC_LIBRARIES)
 set(IMAGE_CODEC_INCLUDE_DIRS)
@@ -53,13 +60,13 @@ if(PNG_FOUND)
 endif()
 
 
-find_package(JPEG)
-
-if(JPEG_FOUND)
-    add_definitions(-DWEBP_HAVE_JPEG)
-    list(APPEND IMAGE_CODEC_INCLUDE_DIRS ${JPEG_INCLUDE_DIR})
-    list(APPEND IMAGE_CODEC_LIBRARIES ${JPEG_LIBRARIES})
-endif()
+#find_package(JPEG)
+#
+#if(JPEG_FOUND)
+#    add_definitions(-DWEBP_HAVE_JPEG)
+#    list(APPEND IMAGE_CODEC_INCLUDE_DIRS ${JPEG_INCLUDE_DIR})
+#    list(APPEND IMAGE_CODEC_LIBRARIES ${JPEG_LIBRARIES})
+#endif()
 
 add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/examples/gifdec.c
@@ -74,7 +81,7 @@ add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/imageio/metadata.c
         ${webp_SOURCE_DIR}/imageio/pnmdec.c
         )
-target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR} ${IMAGE_CODEC_INCLUDE_DIRS})
+target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${jpeg_turbo_SOURCE_DIR} ${gif_SOURCE_DIR} ${IMAGE_CODEC_INCLUDE_DIRS})
 
 
 add_library(animtoolcore STATIC
@@ -88,7 +95,7 @@ add_library(animtoolcore STATIC
         core/imgrun.cpp
         core/quantizer.cpp)
 target_include_directories(animtoolcore PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
-target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux giflib ${IMAGE_CODEC_LIBRARIES})
+target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux giflib jpeg ${IMAGE_CODEC_LIBRARIES})
 
 add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp app/animate_cmd.cpp)
 target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
