@@ -81,7 +81,7 @@ add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/imageio/metadata.c
         ${webp_SOURCE_DIR}/imageio/pnmdec.c
         )
-target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${jpeg_turbo_SOURCE_DIR} ${gif_SOURCE_DIR} ${IMAGE_CODEC_INCLUDE_DIRS})
+target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${jpeg_SOURCE_DIR} ${gif_SOURCE_DIR} ${IMAGE_CODEC_INCLUDE_DIRS})
 
 
 add_library(animtoolcore STATIC
