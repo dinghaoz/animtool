@@ -31,6 +31,8 @@ CPMAddPackage(NAME jpeg
         VERSION 1.2.1
         URL https://github.com/csparker247/jpeg-cmake/archive/refs/tags/v1.2.1.tar.gz
         URL_HASH SHA1=b7a593d62702c0bba32cb1878ddf04dc10b672f6
+        OPTIONS
+        "BUILD_EXECUTABLES OFF"
         )
 
 
