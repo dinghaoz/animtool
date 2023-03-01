@@ -25,13 +25,13 @@
 
 /* Begin PBXFileReference section */
 		C60B352329AF376300506D3C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
+		C60B353029AF3CFE00506D3C /* build-animtool.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-animtool.sh"; sourceTree = "<group>"; };
 		C6E8A4D229AEFD9200F90E97 /* SwiftyAnimTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyAnimTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6E8A4D529AEFD9200F90E97 /* SwiftyAnimTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyAnimTool.h; sourceTree = "<group>"; };
 		C6E8A4DD29AEFE1C00F90E97 /* SwiftyAnimTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAnimTool.swift; sourceTree = "<group>"; };
 		C6E8A4DF29AEFE4300F90E97 /* dropframes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dropframes.h; path = ../core/dropframes.h; sourceTree = "<group>"; };
 		C6E8A4E029AEFE4300F90E97 /* animate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = animate.h; path = ../core/animate.h; sourceTree = "<group>"; };
 		C6E8A4E329AEFE6500F90E97 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = ../CMakeLists.txt; sourceTree = "<group>"; };
-		C6E8A52529AF071100F90E97 /* cmake-build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "cmake-build.sh"; sourceTree = "<group>"; };
 		C6E8A53129AF129C00F90E97 /* libwebpdecoder.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebpdecoder.a; path = "../Debug-iphonesimulator/cmake-products/libwebpdecoder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6E8A53229AF129D00F90E97 /* libanimtoolcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libanimtoolcore.a; path = "../Debug-iphonesimulator/cmake-products/libanimtoolcore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6E8A53329AF129D00F90E97 /* libwebpdemux.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebpdemux.a; path = "../Debug-iphonesimulator/cmake-products/libwebpdemux.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +67,7 @@
 		C6E8A4C829AEFD9200F90E97 = {
 			isa = PBXGroup;
 			children = (
-				C6E8A52529AF071100F90E97 /* cmake-build.sh */,
+				C60B353029AF3CFE00506D3C /* build-animtool.sh */,
 				C6E8A4E329AEFE6500F90E97 /* CMakeLists.txt */,
 				C6E8A4E029AEFE4300F90E97 /* animate.h */,
 				C6E8A4DF29AEFE4300F90E97 /* dropframes.h */,
@@ -201,7 +201,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PROJECT_DIR}/cmake-build.sh\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PROJECT_DIR}/build-animtool.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
