@@ -136,6 +136,10 @@ add_library(webp_imageio STATIC
 target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${jpeg_SOURCE_DIR} ${gif_SOURCE_DIR} ${IMAGE_CODEC_INCLUDE_DIRS})
 
 
+if (IOS)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
+endif()
+
 add_library(animtoolcore STATIC
         core/dropframes.cpp
         core/animate.cpp
@@ -146,6 +150,7 @@ add_library(animtoolcore STATIC
         core/gifrun.cpp
         core/imgrun.cpp
         core/quantizer.cpp)
+
 target_include_directories(animtoolcore PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux giflib jpeg ${IMAGE_CODEC_LIBRARIES})
 

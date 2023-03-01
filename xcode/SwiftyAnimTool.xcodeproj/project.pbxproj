@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C60B352429AF377900506D3C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C60B352329AF376300506D3C /* libc++.tbd */; };
 		C6E8A4D629AEFD9200F90E97 /* SwiftyAnimTool.h in Headers */ = {isa = PBXBuildFile; fileRef = C6E8A4D529AEFD9200F90E97 /* SwiftyAnimTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C6E8A4DE29AEFE1C00F90E97 /* SwiftyAnimTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E8A4DD29AEFE1C00F90E97 /* SwiftyAnimTool.swift */; };
 		C6E8A4E129AEFE4300F90E97 /* dropframes.h in Headers */ = {isa = PBXBuildFile; fileRef = C6E8A4DF29AEFE4300F90E97 /* dropframes.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C60B352329AF376300506D3C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		C6E8A4D229AEFD9200F90E97 /* SwiftyAnimTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyAnimTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6E8A4D529AEFD9200F90E97 /* SwiftyAnimTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyAnimTool.h; sourceTree = "<group>"; };
 		C6E8A4DD29AEFE1C00F90E97 /* SwiftyAnimTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAnimTool.swift; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 				C6E8A53D29AF129D00F90E97 /* libwebp_imageio.a in Frameworks */,
 				C6E8A53E29AF129D00F90E97 /* libgiflib.a in Frameworks */,
 				C6E8A53F29AF129D00F90E97 /* libwebpmux.a in Frameworks */,
+				C60B352429AF377900506D3C /* libc++.tbd in Frameworks */,
 				C6E8A54029AF129D00F90E97 /* libwebp.a in Frameworks */,
 				C6E8A54129AF129D00F90E97 /* libjpeg.a in Frameworks */,
 				C6E8A54229AF129D00F90E97 /* libsharpyuv.a in Frameworks */,
@@ -86,6 +89,7 @@
 		C6E8A51929AF001E00F90E97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C60B352329AF376300506D3C /* libc++.tbd */,
 				C6E8A53229AF129D00F90E97 /* libanimtoolcore.a */,
 				C6E8A53529AF129D00F90E97 /* libgiflib.a */,
 				C6E8A53829AF129D00F90E97 /* libjpeg.a */,
