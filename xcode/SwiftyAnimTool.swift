@@ -14,20 +14,16 @@ public enum AnimToolError: Error {
 
 func DropFrames(
   input: String,
-  output _: String,
+  output: String,
   targetFrameRate: Int,
   targetTotalDuration: Int,
   loopCount: Int,
   srcRect: CGRect,
   dstSize: CGSize
 ) throws {
-  let inputBytes = input.cString(using: .utf8)
-//    try inputData.withUnsafeBytes<CChar> { inputBytes in
-//        try outputData.withUnsafeBytes<CChar> { outputBytes in
-
   if AnimToolDropFramesLite(
-    inputBytes,
-    inputBytes,
+    input.cString(using: .utf8),
+    output.cString(using: .utf8),
     Int32(targetFrameRate),
     Int32(targetTotalDuration),
     Int32(loopCount),
@@ -40,6 +36,4 @@ func DropFrames(
   ) == 0 {
     throw AnimToolError.failed
   }
-//        }
-//    }
 }
