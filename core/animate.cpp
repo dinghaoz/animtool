@@ -87,8 +87,16 @@ namespace cg {
     }
 
     struct RGBA {
-        RGBA(uint8_t argb): r((argb >> 16) & 0x000000FF), g((argb >> 8) & 0x000000FF), b((argb >> 0)  & 0x000000FF), a((argb >> 24)  & 0x000000FF) {}
+        RGBA(uint32_t argb): r((argb >> 16) & 0x000000FF), g((argb >> 8) & 0x000000FF), b((argb >> 0)  & 0x000000FF), a((argb >> 24)  & 0x000000FF) {}
         RGBA(uint8_t r, uint8_t g, uint8_t b, uint8_t a): r(r), g(g), b(b), a(a) {}
+        RGBA(const RGBA& other): r(other.r), g(other.g), b(other.b), a(other.a) {}
+        RGBA& operator=(const RGBA& other) {
+            r = other.r;
+            g = other.g;
+            b = other.b;
+            a = other.a;
+            return *this;
+        }
         uint8_t r;
         uint8_t g;
         uint8_t b;
@@ -103,17 +111,19 @@ namespace cg {
     };
 
     static RGBA Blend(RGBA bottom, RGBA top) {
-        return top;
-        auto alpha_bottom = bottom.a / 256.0f;
-        auto alpha_top = top.a / 256.0f;
+        auto alpha_bottom = bottom.a / 255.0f;
+        auto alpha_top = top.a / 255.0f;
 
         auto alpha = alpha_bottom + alpha_top - alpha_top * alpha_bottom;
+        if (alpha == 0) {
+            return RGBA(0);
+        }
 
         auto r = (top.r*alpha_top + bottom.r*alpha_bottom*(1 - alpha_top)) / alpha;
         auto g = (top.g*alpha_top + bottom.g*alpha_bottom*(1 - alpha_top)) / alpha;
         auto b = (top.b*alpha_top + bottom.b*alpha_bottom*(1 - alpha_top)) / alpha;
 
-        return RGBA(static_cast<uint8_t>(r), static_cast<uint8_t>(g), static_cast<uint8_t>(b), static_cast<uint8_t>(alpha));
+        return RGBA(static_cast<uint8_t>(r), static_cast<uint8_t>(g), static_cast<uint8_t>(b), static_cast<uint8_t>(alpha * 255));
     }
 }
 
@@ -131,7 +141,7 @@ static int Draw(WebPPicture* dst, const WebPPicture* src, cg::Point point) {
             auto dst_y = y + point.y;
             auto dst_pixel = dst->argb[dst_y * dst_stride + dst_x];
 
-            dst->argb[dst_y * dst_stride + dst_x] = src_pixel; //cg::Blend(cg::RGBA(dst_pixel), cg::RGBA(src_pixel)).ToARGB();
+            dst->argb[dst_y * dst_stride + dst_x] = cg::Blend(cg::RGBA(dst_pixel), cg::RGBA(src_pixel)).ToARGB();
         }
     }
 
