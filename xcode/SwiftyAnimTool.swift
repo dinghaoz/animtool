@@ -59,7 +59,7 @@ public func Animate(
     Int32(inputs.count),
     Int32(duration),
     Int32(dstSize.width),
-    Int32(dstSize.height)
+    Int32(dstSize.height),
     output.cString(using: .utf8)
   ) == 0 {
     throw AnimToolError.failed
