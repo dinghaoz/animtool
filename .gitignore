@@ -35,3 +35,6 @@ build/*
 .build/*
 .idea/*
 cmake-build*
+
+*xcuserdata*
+ios/cmake_workspace/*

@@ -1,0 +1,650 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C67BFD3929A8949600DC688A /* animtool_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = C67BFD3829A8949600DC688A /* animtool_ios.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C67BFD4129A8954800DC688A /* animtool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67BFD4029A8954800DC688A /* animtool.swift */; };
+		C67BFDB829A89D1200DC688A /* animate.h in Headers */ = {isa = PBXBuildFile; fileRef = C67BFDB629A89D1200DC688A /* animate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C67BFDB929A89D1200DC688A /* dropframes.h in Headers */ = {isa = PBXBuildFile; fileRef = C67BFDB729A89D1200DC688A /* dropframes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6C0714929AE0DAC0065C27D /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C6C0714829AE0DAC0065C27D /* libc++.tbd */; };
+		C6E8A48B29AEF94600F90E97 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = C6E8A48A29AEF94600F90E97 /* CMakeLists.txt */; };
+		C6E8A4BF29AEFA1E00F90E97 /* libanimtoolcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A4A229AEF9E900F90E97 /* libanimtoolcore.a */; };
+		C6E8A4C029AEFA1E00F90E97 /* libgiflib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A4A429AEF9E900F90E97 /* libgiflib.a */; };
+		C6E8A4C129AEFA1E00F90E97 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A4A629AEF9E900F90E97 /* libjpeg.a */; };
+		C6E8A4C229AEFA1E00F90E97 /* libsharpyuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A4AA29AEF9E900F90E97 /* libsharpyuv.a */; };
+		C6E8A4C329AEFA1E00F90E97 /* libwebp_imageio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A4AE29AEF9E900F90E97 /* libwebp_imageio.a */; };
+		C6E8A4C429AEFA1E00F90E97 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A4AC29AEF9E900F90E97 /* libwebp.a */; };
+		C6E8A4C529AEFA1E00F90E97 /* libwebpdemux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A4B429AEF9E900F90E97 /* libwebpdemux.a */; };
+		C6E8A4C629AEFA1E00F90E97 /* libwebpmux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A4A829AEF9E900F90E97 /* libwebpmux.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C6E8A4A129AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3110EA26AF1F4A0AAA4842A5;
+			remoteInfo = animtoolcore;
+		};
+		C6E8A4A329AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CE9BDB157AC14157A20ED527;
+			remoteInfo = giflib;
+		};
+		C6E8A4A529AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 182B25CED7E34215A6D067C4;
+			remoteInfo = jpeg;
+		};
+		C6E8A4A729AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3BFD92909BC648F39FCB1E97;
+			remoteInfo = libwebpmux;
+		};
+		C6E8A4A929AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 96F737689F86455FBB0B1DD9;
+			remoteInfo = sharpyuv;
+		};
+		C6E8A4AB29AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D123F4C6FBDB4EB4A061EDF1;
+			remoteInfo = webp;
+		};
+		C6E8A4AD29AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A9A46DF29E73455A8B56E7AF;
+			remoteInfo = webp_imageio;
+		};
+		C6E8A4AF29AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B9084EA1AEFC4343BB45A546;
+			remoteInfo = webpdecode;
+		};
+		C6E8A4B129AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E12E3A873235438EA6E7332C;
+			remoteInfo = webpdecoder;
+		};
+		C6E8A4B329AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 898B0BACCA5543E2A19041BA;
+			remoteInfo = webpdemux;
+		};
+		C6E8A4B529AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A971B02541554160AA5968E5;
+			remoteInfo = webpdsp;
+		};
+		C6E8A4B729AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B1F6F1C216F54A9AB64D28E0;
+			remoteInfo = webpdspdecode;
+		};
+		C6E8A4B929AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 29FE9EF223684D1891DEB00F;
+			remoteInfo = webpencode;
+		};
+		C6E8A4BB29AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 41C4E7DFA5D2405B8E994D42;
+			remoteInfo = webputils;
+		};
+		C6E8A4BD29AEF9E900F90E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3EE94123230244A6BA7F3DA3;
+			remoteInfo = webputilsdecode;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C67BFD3529A8949600DC688A /* animtool_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = animtool_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C67BFD3829A8949600DC688A /* animtool_ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = animtool_ios.h; sourceTree = "<group>"; };
+		C67BFD4029A8954800DC688A /* animtool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animtool.swift; sourceTree = "<group>"; };
+		C67BFDB629A89D1200DC688A /* animate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = animate.h; path = ../core/animate.h; sourceTree = "<group>"; };
+		C67BFDB729A89D1200DC688A /* dropframes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dropframes.h; path = ../core/dropframes.h; sourceTree = "<group>"; };
+		C6C0714829AE0DAC0065C27D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
+		C6E8A48A29AEF94600F90E97 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CMakeLists.txt; path = ../CMakeLists.txt; sourceTree = "<group>"; };
+		C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = animtool.xcodeproj; path = cmake_workspace/animtool.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C67BFD3229A8949600DC688A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6E8A4BF29AEFA1E00F90E97 /* libanimtoolcore.a in Frameworks */,
+				C6E8A4C029AEFA1E00F90E97 /* libgiflib.a in Frameworks */,
+				C6E8A4C129AEFA1E00F90E97 /* libjpeg.a in Frameworks */,
+				C6E8A4C229AEFA1E00F90E97 /* libsharpyuv.a in Frameworks */,
+				C6E8A4C329AEFA1E00F90E97 /* libwebp_imageio.a in Frameworks */,
+				C6E8A4C429AEFA1E00F90E97 /* libwebp.a in Frameworks */,
+				C6E8A4C529AEFA1E00F90E97 /* libwebpdemux.a in Frameworks */,
+				C6E8A4C629AEFA1E00F90E97 /* libwebpmux.a in Frameworks */,
+				C6C0714929AE0DAC0065C27D /* libc++.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C67BFD2B29A8949600DC688A = {
+			isa = PBXGroup;
+			children = (
+				C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */,
+				C6E8A48A29AEF94600F90E97 /* CMakeLists.txt */,
+				C67BFDB629A89D1200DC688A /* animate.h */,
+				C67BFDB729A89D1200DC688A /* dropframes.h */,
+				C67BFD4029A8954800DC688A /* animtool.swift */,
+				C67BFD3829A8949600DC688A /* animtool_ios.h */,
+				C67BFD3629A8949600DC688A /* Products */,
+				C67BFD7529A8965700DC688A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C67BFD3629A8949600DC688A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C67BFD3529A8949600DC688A /* animtool_ios.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C67BFD7529A8965700DC688A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C6C0714829AE0DAC0065C27D /* libc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C6E8A48D29AEF9E900F90E97 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6E8A4A229AEF9E900F90E97 /* libanimtoolcore.a */,
+				C6E8A4A429AEF9E900F90E97 /* libgiflib.a */,
+				C6E8A4A629AEF9E900F90E97 /* libjpeg.a */,
+				C6E8A4A829AEF9E900F90E97 /* libwebpmux.a */,
+				C6E8A4AA29AEF9E900F90E97 /* libsharpyuv.a */,
+				C6E8A4AC29AEF9E900F90E97 /* libwebp.a */,
+				C6E8A4AE29AEF9E900F90E97 /* libwebp_imageio.a */,
+				C6E8A4B029AEF9E900F90E97 /* libwebpdecode.a */,
+				C6E8A4B229AEF9E900F90E97 /* libwebpdecoder.a */,
+				C6E8A4B429AEF9E900F90E97 /* libwebpdemux.a */,
+				C6E8A4B629AEF9E900F90E97 /* libwebpdsp.a */,
+				C6E8A4B829AEF9E900F90E97 /* libwebpdspdecode.a */,
+				C6E8A4BA29AEF9E900F90E97 /* libwebpencode.a */,
+				C6E8A4BC29AEF9E900F90E97 /* libwebputils.a */,
+				C6E8A4BE29AEF9E900F90E97 /* libwebputilsdecode.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C67BFD3029A8949600DC688A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C67BFDB929A89D1200DC688A /* dropframes.h in Headers */,
+				C67BFDB829A89D1200DC688A /* animate.h in Headers */,
+				C67BFD3929A8949600DC688A /* animtool_ios.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C67BFD3429A8949600DC688A /* animtool_ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C67BFD3C29A8949600DC688A /* Build configuration list for PBXNativeTarget "animtool_ios" */;
+			buildPhases = (
+				C67BFD3F29A894CD00DC688A /* cmake */,
+				C67BFD3029A8949600DC688A /* Headers */,
+				C67BFD3129A8949600DC688A /* Sources */,
+				C67BFD3229A8949600DC688A /* Frameworks */,
+				C67BFD3329A8949600DC688A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = animtool_ios;
+			productName = animtool_ios;
+			productReference = C67BFD3529A8949600DC688A /* animtool_ios.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C67BFD2C29A8949600DC688A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					C67BFD3429A8949600DC688A = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
+					};
+				};
+			};
+			buildConfigurationList = C67BFD2F29A8949600DC688A /* Build configuration list for PBXProject "animtool_ios" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C67BFD2B29A8949600DC688A;
+			productRefGroup = C67BFD3629A8949600DC688A /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C6E8A48D29AEF9E900F90E97 /* Products */;
+					ProjectRef = C6E8A48C29AEF9E900F90E97 /* animtool.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				C67BFD3429A8949600DC688A /* animtool_ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C6E8A4A229AEF9E900F90E97 /* libanimtoolcore.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libanimtoolcore.a;
+			remoteRef = C6E8A4A129AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4A429AEF9E900F90E97 /* libgiflib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libgiflib.a;
+			remoteRef = C6E8A4A329AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4A629AEF9E900F90E97 /* libjpeg.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjpeg.a;
+			remoteRef = C6E8A4A529AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4A829AEF9E900F90E97 /* libwebpmux.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebpmux.a;
+			remoteRef = C6E8A4A729AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4AA29AEF9E900F90E97 /* libsharpyuv.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsharpyuv.a;
+			remoteRef = C6E8A4A929AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4AC29AEF9E900F90E97 /* libwebp.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebp.a;
+			remoteRef = C6E8A4AB29AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4AE29AEF9E900F90E97 /* libwebp_imageio.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebp_imageio.a;
+			remoteRef = C6E8A4AD29AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4B029AEF9E900F90E97 /* libwebpdecode.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebpdecode.a;
+			remoteRef = C6E8A4AF29AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4B229AEF9E900F90E97 /* libwebpdecoder.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebpdecoder.a;
+			remoteRef = C6E8A4B129AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4B429AEF9E900F90E97 /* libwebpdemux.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebpdemux.a;
+			remoteRef = C6E8A4B329AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4B629AEF9E900F90E97 /* libwebpdsp.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebpdsp.a;
+			remoteRef = C6E8A4B529AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4B829AEF9E900F90E97 /* libwebpdspdecode.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebpdspdecode.a;
+			remoteRef = C6E8A4B729AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4BA29AEF9E900F90E97 /* libwebpencode.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebpencode.a;
+			remoteRef = C6E8A4B929AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4BC29AEF9E900F90E97 /* libwebputils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebputils.a;
+			remoteRef = C6E8A4BB29AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C6E8A4BE29AEF9E900F90E97 /* libwebputilsdecode.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libwebputilsdecode.a;
+			remoteRef = C6E8A4BD29AEF9E900F90E97 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C67BFD3329A8949600DC688A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6E8A48B29AEF94600F90E97 /* CMakeLists.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C67BFD3F29A894CD00DC688A /* cmake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../CMakeLists.txt",
+			);
+			name = cmake;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/cmake_workspace/animtool.xcodeproj/project.pbxproj",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nmkdir -p ${PROJECT_DIR}/cmake_workspace\ncmake -S ${PROJECT_DIR}/.. -B ${PROJECT_DIR}/cmake_workspace -GXcode -DCMAKE_TOOLCHAIN_FILE=${PROJECT_DIR}/../cmake/ios.toolchain.cmake -DPLATFORM=OS64COMBINED -DENABLE_BITCODE=FALSE\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C67BFD3129A8949600DC688A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C67BFD4129A8954800DC688A /* animtool.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C67BFD3A29A8949600DC688A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C67BFD3B29A8949600DC688A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C67BFD3D29A8949600DC688A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N3639FK4V2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = ../;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wordbucketapp.animtool-ios";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C67BFD3E29A8949600DC688A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N3639FK4V2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = ../;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wordbucketapp.animtool-ios";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C67BFD2F29A8949600DC688A /* Build configuration list for PBXProject "animtool_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C67BFD3A29A8949600DC688A /* Debug */,
+				C67BFD3B29A8949600DC688A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C67BFD3C29A8949600DC688A /* Build configuration list for PBXNativeTarget "animtool_ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C67BFD3D29A8949600DC688A /* Debug */,
+				C67BFD3E29A8949600DC688A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C67BFD2C29A8949600DC688A /* Project object */;
+}
