@@ -193,7 +193,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/../CMakeLists.txt",
-				"${PROJECT_DIR}/cmake-build.sh",
+				"${PROJECT_DIR}/build-animtool.sh",
 			);
 			name = CMake;
 			outputFileListPaths = (
