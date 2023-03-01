@@ -37,4 +37,4 @@ build/*
 cmake-build*
 
 *xcuserdata*
-ios/cmake_workspace/*
+*/cmake_workspace/*

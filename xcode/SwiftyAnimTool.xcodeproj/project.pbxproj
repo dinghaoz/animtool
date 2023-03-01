@@ -1,0 +1,419 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C6E8A4D629AEFD9200F90E97 /* SwiftyAnimTool.h in Headers */ = {isa = PBXBuildFile; fileRef = C6E8A4D529AEFD9200F90E97 /* SwiftyAnimTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6E8A4DE29AEFE1C00F90E97 /* SwiftyAnimTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E8A4DD29AEFE1C00F90E97 /* SwiftyAnimTool.swift */; };
+		C6E8A4E129AEFE4300F90E97 /* dropframes.h in Headers */ = {isa = PBXBuildFile; fileRef = C6E8A4DF29AEFE4300F90E97 /* dropframes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6E8A4E229AEFE4300F90E97 /* animate.h in Headers */ = {isa = PBXBuildFile; fileRef = C6E8A4E029AEFE4300F90E97 /* animate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6E8A53A29AF129D00F90E97 /* libwebpdecoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A53129AF129C00F90E97 /* libwebpdecoder.a */; };
+		C6E8A53B29AF129D00F90E97 /* libanimtoolcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A53229AF129D00F90E97 /* libanimtoolcore.a */; };
+		C6E8A53C29AF129D00F90E97 /* libwebpdemux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A53329AF129D00F90E97 /* libwebpdemux.a */; };
+		C6E8A53D29AF129D00F90E97 /* libwebp_imageio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A53429AF129D00F90E97 /* libwebp_imageio.a */; };
+		C6E8A53E29AF129D00F90E97 /* libgiflib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A53529AF129D00F90E97 /* libgiflib.a */; };
+		C6E8A53F29AF129D00F90E97 /* libwebpmux.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A53629AF129D00F90E97 /* libwebpmux.a */; };
+		C6E8A54029AF129D00F90E97 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A53729AF129D00F90E97 /* libwebp.a */; };
+		C6E8A54129AF129D00F90E97 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A53829AF129D00F90E97 /* libjpeg.a */; };
+		C6E8A54229AF129D00F90E97 /* libsharpyuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6E8A53929AF129D00F90E97 /* libsharpyuv.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C6E8A4D229AEFD9200F90E97 /* SwiftyAnimTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyAnimTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E8A4D529AEFD9200F90E97 /* SwiftyAnimTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyAnimTool.h; sourceTree = "<group>"; };
+		C6E8A4DD29AEFE1C00F90E97 /* SwiftyAnimTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAnimTool.swift; sourceTree = "<group>"; };
+		C6E8A4DF29AEFE4300F90E97 /* dropframes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dropframes.h; path = ../core/dropframes.h; sourceTree = "<group>"; };
+		C6E8A4E029AEFE4300F90E97 /* animate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = animate.h; path = ../core/animate.h; sourceTree = "<group>"; };
+		C6E8A4E329AEFE6500F90E97 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = ../CMakeLists.txt; sourceTree = "<group>"; };
+		C6E8A52529AF071100F90E97 /* cmake-build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "cmake-build.sh"; sourceTree = "<group>"; };
+		C6E8A53129AF129C00F90E97 /* libwebpdecoder.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebpdecoder.a; path = "../Debug-iphonesimulator/cmake-products/libwebpdecoder.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E8A53229AF129D00F90E97 /* libanimtoolcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libanimtoolcore.a; path = "../Debug-iphonesimulator/cmake-products/libanimtoolcore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E8A53329AF129D00F90E97 /* libwebpdemux.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebpdemux.a; path = "../Debug-iphonesimulator/cmake-products/libwebpdemux.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E8A53429AF129D00F90E97 /* libwebp_imageio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebp_imageio.a; path = "../Debug-iphonesimulator/cmake-products/libwebp_imageio.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E8A53529AF129D00F90E97 /* libgiflib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgiflib.a; path = "../Debug-iphonesimulator/cmake-products/libgiflib.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E8A53629AF129D00F90E97 /* libwebpmux.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebpmux.a; path = "../Debug-iphonesimulator/cmake-products/libwebpmux.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E8A53729AF129D00F90E97 /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebp.a; path = "../Debug-iphonesimulator/cmake-products/libwebp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E8A53829AF129D00F90E97 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../Debug-iphonesimulator/cmake-products/libjpeg.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6E8A53929AF129D00F90E97 /* libsharpyuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsharpyuv.a; path = "../Debug-iphonesimulator/cmake-products/libsharpyuv.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C6E8A4CF29AEFD9200F90E97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6E8A53A29AF129D00F90E97 /* libwebpdecoder.a in Frameworks */,
+				C6E8A53B29AF129D00F90E97 /* libanimtoolcore.a in Frameworks */,
+				C6E8A53C29AF129D00F90E97 /* libwebpdemux.a in Frameworks */,
+				C6E8A53D29AF129D00F90E97 /* libwebp_imageio.a in Frameworks */,
+				C6E8A53E29AF129D00F90E97 /* libgiflib.a in Frameworks */,
+				C6E8A53F29AF129D00F90E97 /* libwebpmux.a in Frameworks */,
+				C6E8A54029AF129D00F90E97 /* libwebp.a in Frameworks */,
+				C6E8A54129AF129D00F90E97 /* libjpeg.a in Frameworks */,
+				C6E8A54229AF129D00F90E97 /* libsharpyuv.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C6E8A4C829AEFD9200F90E97 = {
+			isa = PBXGroup;
+			children = (
+				C6E8A52529AF071100F90E97 /* cmake-build.sh */,
+				C6E8A4E329AEFE6500F90E97 /* CMakeLists.txt */,
+				C6E8A4E029AEFE4300F90E97 /* animate.h */,
+				C6E8A4DF29AEFE4300F90E97 /* dropframes.h */,
+				C6E8A4DD29AEFE1C00F90E97 /* SwiftyAnimTool.swift */,
+				C6E8A4D529AEFD9200F90E97 /* SwiftyAnimTool.h */,
+				C6E8A4D329AEFD9200F90E97 /* Products */,
+				C6E8A51929AF001E00F90E97 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C6E8A4D329AEFD9200F90E97 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6E8A4D229AEFD9200F90E97 /* SwiftyAnimTool.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6E8A51929AF001E00F90E97 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C6E8A53229AF129D00F90E97 /* libanimtoolcore.a */,
+				C6E8A53529AF129D00F90E97 /* libgiflib.a */,
+				C6E8A53829AF129D00F90E97 /* libjpeg.a */,
+				C6E8A53929AF129D00F90E97 /* libsharpyuv.a */,
+				C6E8A53429AF129D00F90E97 /* libwebp_imageio.a */,
+				C6E8A53729AF129D00F90E97 /* libwebp.a */,
+				C6E8A53129AF129C00F90E97 /* libwebpdecoder.a */,
+				C6E8A53329AF129D00F90E97 /* libwebpdemux.a */,
+				C6E8A53629AF129D00F90E97 /* libwebpmux.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C6E8A4CD29AEFD9200F90E97 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6E8A4D629AEFD9200F90E97 /* SwiftyAnimTool.h in Headers */,
+				C6E8A4E129AEFE4300F90E97 /* dropframes.h in Headers */,
+				C6E8A4E229AEFE4300F90E97 /* animate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C6E8A4D129AEFD9200F90E97 /* SwiftyAnimTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6E8A4D929AEFD9200F90E97 /* Build configuration list for PBXNativeTarget "SwiftyAnimTool" */;
+			buildPhases = (
+				C6E8A4E429AEFE8200F90E97 /* CMake */,
+				C6E8A4CD29AEFD9200F90E97 /* Headers */,
+				C6E8A4CE29AEFD9200F90E97 /* Sources */,
+				C6E8A4CF29AEFD9200F90E97 /* Frameworks */,
+				C6E8A4D029AEFD9200F90E97 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftyAnimTool;
+			productName = SwiftyAnimTool;
+			productReference = C6E8A4D229AEFD9200F90E97 /* SwiftyAnimTool.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C6E8A4C929AEFD9200F90E97 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					C6E8A4D129AEFD9200F90E97 = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
+					};
+				};
+			};
+			buildConfigurationList = C6E8A4CC29AEFD9200F90E97 /* Build configuration list for PBXProject "SwiftyAnimTool" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C6E8A4C829AEFD9200F90E97;
+			productRefGroup = C6E8A4D329AEFD9200F90E97 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C6E8A4D129AEFD9200F90E97 /* SwiftyAnimTool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C6E8A4D029AEFD9200F90E97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C6E8A4E429AEFE8200F90E97 /* CMake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../CMakeLists.txt",
+				"${PROJECT_DIR}/cmake-build.sh",
+			);
+			name = CMake;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/cmake-products/libanimtoolcore.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PROJECT_DIR}/cmake-build.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C6E8A4CE29AEFD9200F90E97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6E8A4DE29AEFE1C00F90E97 /* SwiftyAnimTool.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C6E8A4D729AEFD9200F90E97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C6E8A4D829AEFD9200F90E97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C6E8A4DA29AEFD9200F90E97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "${TARGET_BUILD_DIR}/cmake-products";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordbucketapp.SwiftyAnimTool;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C6E8A4DB29AEFD9200F90E97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "${TARGET_BUILD_DIR}/cmake-products";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordbucketapp.SwiftyAnimTool;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C6E8A4CC29AEFD9200F90E97 /* Build configuration list for PBXProject "SwiftyAnimTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6E8A4D729AEFD9200F90E97 /* Debug */,
+				C6E8A4D829AEFD9200F90E97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C6E8A4D929AEFD9200F90E97 /* Build configuration list for PBXNativeTarget "SwiftyAnimTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6E8A4DA29AEFD9200F90E97 /* Debug */,
+				C6E8A4DB29AEFD9200F90E97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C6E8A4C929AEFD9200F90E97 /* Project object */;
+}
