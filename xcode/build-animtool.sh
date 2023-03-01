@@ -16,6 +16,14 @@ then
   echo "The variable is greater than $PLATFORM."
 fi
 
+PATH=/opt/homebrew/bin/:$PATH
+
+echo $PATH
+
+if ! [ -x "$(command -v cmake)" ]; then
+  echo 'Error: cmake is not installed. Use `brew install cmake` to install.' >&2
+  exit 1
+fi
 
 mkdir -p ${TARGET_BUILD_DIR}/cmake
 mkdir -p ${TARGET_BUILD_DIR}/cmake-products
