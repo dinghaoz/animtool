@@ -14,6 +14,8 @@ int AnimToolAnimate(
         const char*const image_paths[],
         int n_images,
         int duration,
+        int width,
+        int height,
         const char* output,
         const char* format,
         // global: WebPAnimEncoderOptions
@@ -32,6 +34,8 @@ int AnimToolAnimateLite(
         const char*const image_paths[],
         int n_images,
         int duration,
+        int width,
+        int height,
         const char* output
 );
 

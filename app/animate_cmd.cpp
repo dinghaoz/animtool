@@ -19,6 +19,8 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
             cmd->args,
             cmd->n_args,
             cmd->GetInt("duration"),
+            cmd->GetInt("width"),
+            cmd->GetInt("height"),
             cmd->GetStr("output"),
             cmd->GetStr("format"),
 
@@ -50,25 +52,25 @@ void CmdAnimateInit(cli::Cmd* cmd) {
             .action = CmdAction
     };
 
-//    cmd->AddFlag(cli::Flag{
-//            .name = "width",
-//            .aliases = {"w"},
-//            .desc = "Canvas width",
-//            .type = cli::FLAG_INT,
-//            .required = 0,
-//            .multiple = 0,
-//            .default_value = { .int_value = 0 }
-//    });
-//
-//    cmd->AddFlag(cli::Flag{
-//            .name = "height",
-//            .aliases = {"h"},
-//            .desc = "Canvas height",
-//            .type = cli::FLAG_INT,
-//            .required = 0,
-//            .multiple = 0,
-//            .default_value = { .int_value = 0 }
-//    });
+    cmd->AddFlag(cli::Flag{
+            .name = "width",
+            .aliases = {"w"},
+            .desc = "Canvas width",
+            .type = cli::FLAG_INT,
+            .required = 0,
+            .multiple = 0,
+            .default_value = { .int_value = 0 }
+    });
+
+    cmd->AddFlag(cli::Flag{
+            .name = "height",
+            .aliases = {"h"},
+            .desc = "Canvas height",
+            .type = cli::FLAG_INT,
+            .required = 0,
+            .multiple = 0,
+            .default_value = { .int_value = 0 }
+    });
 
     cmd->AddFlag(cli::Flag{
             .name = "output",
