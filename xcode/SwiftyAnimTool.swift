@@ -37,3 +37,28 @@ func DropFrames(
     throw AnimToolError.failed
   }
 }
+
+func Animate(
+  inputs: [String],
+  duration: Int,
+  output: String
+) throws {
+  let paths = inputs.map {
+    UnsafePointer(strdup($0))
+  }
+
+  defer {
+    paths.forEach {
+      free(UnsafeMutablePointer(mutating: $0))
+    }
+  }
+
+  if AnimToolAnimateLite(
+    paths,
+    Int32(inputs.count),
+    Int32(duration),
+    output.cString(using: .utf8)
+  ) == 0 {
+    throw AnimToolError.failed
+  }
+}

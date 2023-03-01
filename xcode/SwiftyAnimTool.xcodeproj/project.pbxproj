@@ -76,7 +76,9 @@
 				C6E8A4D329AEFD9200F90E97 /* Products */,
 				C6E8A51929AF001E00F90E97 /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		C6E8A4D329AEFD9200F90E97 /* Products */ = {
 			isa = PBXGroup;
