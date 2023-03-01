@@ -41,6 +41,7 @@ public func DropFrames(
 public func Animate(
   inputs: [String],
   duration: Int,
+  dstSize: CGSize,
   output: String
 ) throws {
   let paths = inputs.map {
@@ -57,6 +58,8 @@ public func Animate(
     paths,
     Int32(inputs.count),
     Int32(duration),
+    Int32(dstSize.width),
+    Int32(dstSize.height)
     output.cString(using: .utf8)
   ) == 0 {
     throw AnimToolError.failed
