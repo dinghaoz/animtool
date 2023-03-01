@@ -13,7 +13,6 @@ PLATFORM=OS64
 if [[ $EFFECTIVE_PLATFORM_NAME == "-iphonesimulator" ]]
 then
   PLATFORM=SIMULATOR64
-  echo "The variable is greater than $PLATFORM."
 fi
 
 PATH=/opt/homebrew/bin/:$PATH
