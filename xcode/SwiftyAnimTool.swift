@@ -12,7 +12,7 @@ public enum AnimToolError: Error {
   case invalidArgs
 }
 
-func DropFrames(
+public func DropFrames(
   input: String,
   output: String,
   targetFrameRate: Int,
@@ -38,7 +38,7 @@ func DropFrames(
   }
 }
 
-func Animate(
+public func Animate(
   inputs: [String],
   duration: Int,
   output: String
