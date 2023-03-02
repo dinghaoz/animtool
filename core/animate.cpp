@@ -87,7 +87,13 @@ namespace cg {
     }
 
     struct RGBA {
-        RGBA(uint32_t argb): r((argb >> 16) & 0x000000FF), g((argb >> 8) & 0x000000FF), b((argb >> 0)  & 0x000000FF), a((argb >> 24)  & 0x000000FF) {}
+        static RGBA FromRGBA(uint32_t rgba) {
+            return RGBA((rgba >> 24) & 0x000000FF, (rgba >> 16) & 0x000000FF, (rgba >> 8) & 0x000000FF, (rgba >> 0) & 0x000000FF);
+        }
+
+        static RGBA FromARGB(uint32_t argb) {
+            return RGBA((argb >> 16) & 0x000000FF, (argb >> 8) & 0x000000FF, (argb >> 0) & 0x000000FF, (argb >> 24) & 0x000000FF);
+        }
         RGBA(uint8_t r, uint8_t g, uint8_t b, uint8_t a): r(r), g(g), b(b), a(a) {}
         RGBA(const RGBA& other): r(other.r), g(other.g), b(other.b), a(other.a) {}
         RGBA& operator=(const RGBA& other) {
@@ -116,7 +122,7 @@ namespace cg {
 
         auto alpha = alpha_bottom + alpha_top - alpha_top * alpha_bottom;
         if (alpha == 0) {
-            return RGBA(0);
+            return RGBA::FromARGB(0);
         }
 
         auto r = (top.r*alpha_top + bottom.r*alpha_bottom*(1 - alpha_top)) / alpha;
@@ -141,7 +147,7 @@ static int Draw(WebPPicture* dst, const WebPPicture* src, cg::Point point) {
             auto dst_y = y + point.y;
             auto dst_pixel = dst->argb[dst_y * dst_stride + dst_x];
 
-            dst->argb[dst_y * dst_stride + dst_x] = cg::Blend(cg::RGBA(dst_pixel), cg::RGBA(src_pixel)).ToARGB();
+            dst->argb[dst_y * dst_stride + dst_x] = cg::Blend(cg::RGBA::FromARGB(dst_pixel), cg::RGBA::FromARGB(src_pixel)).ToARGB();
         }
     }
 
@@ -149,12 +155,81 @@ static int Draw(WebPPicture* dst, const WebPPicture* src, cg::Point point) {
 }
 
 
+static int DrawOverFit(WebPPicture* dst, WebPPicture* src) {
+
+    auto fit_rect = cg::FitTo(
+            cg::Size {.width = dst->width, .height = dst->height},
+            cg::Size {.width = src->width, .height = src->height}
+    );
+
+    logger::d("fit_rect %d:%d:%d:%d", fit_rect.origin.x, fit_rect.origin.y, fit_rect.size.width, fit_rect.size.height);
+    check(WebPPictureRescale(src, fit_rect.size.width, fit_rect.size.height));
+    check(Draw(dst, src, fit_rect.origin));
+
+    return 1;
+}
+
+static int WebPPictureInitWithFile(WebPPicture* pic, const char* path) {
+
+    WebPData data;
+    WebPDataInit(&data);
+    defer(WebPDataClear(&data));
+
+    check(ImgIoUtilReadFile(path, &data.bytes, &data.size));
+
+    auto reader = WebPGuessImageReader(data.bytes, data.size);
+
+    check(reader(data.bytes, data.size, pic, 1, NULL));
+
+    return 1;
+}
+
+static int ParseColor(const char* pstart, const char* pend, uint8_t base, uint32_t* value) {
+    require(base == 16 || base == 10 || base == 8);
+    const char* p = pstart;
+    int ret = 0;
+    while (p < pend) {
+        if ('a' <= *p && *p <= 'f') {
+            require(base == 16);
+            ret = ret * base + (*p-'a') + 10;
+        } else if ('A' <= *p && *p <= 'F') {
+            require(base == 16);
+            ret = ret * base + (*p-'A') + 10;
+        } else if ('0' <= *p && *p <= '9') {
+            ret = ret * base + (*p-'0');
+        } else {
+            notreached("invalid color char %c", *p);
+        }
+
+        ++p;
+    }
+
+    *value = ret;
+
+    return 1;
+}
+
+static uint32_t RGBAFrom(const char* color_str) {
+    if (color_str[0] == '0' && color_str[1] == 'x') {
+        uint32_t color = 0;
+        check(ParseColor(color_str + 2, color_str + strlen(color_str), 16, &color));
+        return color;
+    } else {
+        uint32_t color = 0;
+        check(ParseColor(color_str, color_str + strlen(color_str), 10, &color));
+        return color;
+    }
+}
+
+
 int AnimToolAnimate(
         const char* const image_paths[],
         int n_images,
-        int duration,
+        const char* background,
+        const char* bg_color_str,
         int width,
         int height,
+        int duration,
         const char* output,
         const char* format,
         // global: WebPAnimEncoderOptions
@@ -167,8 +242,8 @@ int AnimToolAnimate(
         int method,
         int pass
 ) {
-    AnimEncoder* encoder = 0;
-    defer(if (encoder) AnimEncoderDelete(encoder); );
+
+    require(n_images > 0);
 
     AnimEncoderOptions encoder_options {
         .verbose = verbose,
@@ -183,62 +258,83 @@ int AnimToolAnimate(
     };
 
 
+    auto bg_color = cg::RGBA::FromRGBA(RGBAFrom(bg_color_str));
+
+    logger::d("bg_color ARGB %x", bg_color.ToARGB());
+    if (width == 0 || height == 0) {
+        if (background) {
+            WebPPicture bg;
+            check(WebPPictureInit(&bg));
+            defer(WebPPictureFree(&bg));
+            bg.use_argb = 1;
+
+            check(WebPPictureInitWithFile(&bg, background));
+            width = bg.width;
+            height = bg.height;
+            logger::d("implied size from bg %d:%d", width, height);
+        } else {
+
+            WebPPicture first_image;
+            check(WebPPictureInit(&first_image));
+            defer(WebPPictureFree(&first_image));
+            first_image.use_argb = 1;
+
+            check(WebPPictureInitWithFile(&first_image, image_paths[0]));
+            width = first_image.width;
+            height = first_image.height;
+            logger::d("implied size from first frame %d:%d", width, height);
+        }
+    }
+
+    WebPPicture model;
+    check(WebPPictureInit(&model));
+    defer(WebPPictureFree(&model));
+    model.use_argb = 1;
+    model.width = width;
+    model.height = height;
+    check(WebPPictureAlloc(&model));
+
+    if (bg_color.a > 0) {
+        SetColor(&model, bg_color.ToARGB());
+    }
+
+    if (background) {
+        WebPPicture bg;
+        check(WebPPictureInit(&bg));
+        defer(WebPPictureFree(&bg));
+        bg.use_argb = 1;
+
+        check(WebPPictureInitWithFile(&bg, background));
+
+        check(DrawOverFit(&model, &bg));
+    }
+
+
+    auto encoder = AnimEncoderNew(format, width, height, &encoder_options);
+    check(encoder);
+    defer(if (encoder) AnimEncoderDelete(encoder); );
+
+
     WebPPicture canvas;
     check(WebPPictureInit(&canvas));
     defer(WebPPictureFree(&canvas));
+    canvas.use_argb = 1;
+
 
     int total_duration_so_far = 0;
     for (int i=0; i<n_images; ++i) {
-        WebPData data;
-        WebPDataInit(&data);
-        defer(WebPDataClear(&data));
-
-        check(ImgIoUtilReadFile(image_paths[i], &data.bytes, &data.size));
-
-        auto reader = WebPGuessImageReader(data.bytes, data.size);
 
         WebPPicture pic;
         check(WebPPictureInit(&pic));
         defer(WebPPictureFree(&pic));
         pic.use_argb = 1;
-        check(reader(data.bytes, data.size, &pic, 1, NULL));
+        check(WebPPictureInitWithFile(&pic, image_paths[i]));
 
-        WebPPicture* frame = &pic;
-
-        if (width == 0 || height == 0) {
-            width = pic.width;
-            height = pic.height;
-            logger::d("implied size %d:%d", width, height);
-        } else if (width != pic.width || height != pic.width) {
-            if (canvas.width == 0) {
-                canvas.width = width;
-                canvas.height = height;
-                canvas.use_argb = 1;
-                check(WebPPictureAlloc(&canvas));
-            }
-            SetColor(&canvas, 0xFF000000);
-
-            auto fit_rect = cg::FitTo(
-                    cg::Size {.width = canvas.width, .height = canvas.height},
-                    cg::Size {.width = pic.width, .height = pic.height}
-            );
-
-            logger::d("fit_rect %d:%d:%d:%d", fit_rect.origin.x, fit_rect.origin.y, fit_rect.size.width, fit_rect.size.height);
-            check(WebPPictureRescale(&pic, fit_rect.size.width, fit_rect.size.height));
-            check(Draw(&canvas, &pic, fit_rect.origin));
-
-            frame = &canvas;
-        }
-
-        if (encoder == 0) {
-            encoder = AnimEncoderNew(format, width, height, &encoder_options);
-            check(encoder);
-        }
+        check(WebPPictureCopy(&model, &canvas));
+        check(DrawOverFit(&canvas, &pic));
 
         auto end_ts = total_duration_so_far + duration;
-
-        check(AnimEncoderAddFrame(encoder, frame, total_duration_so_far, end_ts, &frame_options));
-
+        check(AnimEncoderAddFrame(encoder, &canvas, total_duration_so_far, end_ts, &frame_options));
         total_duration_so_far = end_ts;
     }
 
@@ -252,13 +348,15 @@ int AnimToolAnimate(
 int AnimToolAnimateLite(
         const char*const image_paths[],
         int n_images,
-        int duration,
+        const char* background,
+        const char* bg_color_str,
         int width,
         int height,
+        int duration,
         const char* output
 ) {
     return AnimToolAnimate(
-            image_paths, n_images, duration, width, height, output, "webp",
+            image_paths, n_images, background, bg_color_str, width, height, duration, output, "webp",
 
             0, // minimize_size
             0, // verbose

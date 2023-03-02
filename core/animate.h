@@ -5,6 +5,7 @@
 #ifndef MERCURY_ANIMATE_H
 #define MERCURY_ANIMATE_H
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -13,9 +14,11 @@ extern "C" {
 int AnimToolAnimate(
         const char*const image_paths[],
         int n_images,
-        int duration,
+        const char* background,
+        const char* bg_color_str,
         int width,
         int height,
+        int duration,
         const char* output,
         const char* format,
         // global: WebPAnimEncoderOptions
@@ -33,9 +36,11 @@ int AnimToolAnimate(
 int AnimToolAnimateLite(
         const char*const image_paths[],
         int n_images,
-        int duration,
+        const char* background,
+        const char* bg_color_str,
         int width,
         int height,
+        int duration,
         const char* output
 );
 

@@ -18,9 +18,11 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
     if (!AnimToolAnimate(
             cmd->args,
             cmd->n_args,
-            cmd->GetInt("duration"),
+            cmd->GetStr("background"),
+            cmd->GetStr("background_color"),
             cmd->GetInt("width"),
             cmd->GetInt("height"),
+            cmd->GetInt("duration"),
             cmd->GetStr("output"),
             cmd->GetStr("format"),
 
@@ -51,6 +53,26 @@ void CmdAnimateInit(cli::Cmd* cmd) {
             .context = nullptr,
             .action = CmdAction
     };
+
+
+    cmd->AddFlag(cli::Flag{
+            .name = "background",
+            .aliases = {"b"},
+            .desc = "background image",
+            .type = cli::FLAG_STR,
+            .required = 0,
+            .multiple = 0
+    });
+
+    cmd->AddFlag(cli::Flag{
+            .name = "background_color",
+            .aliases = {"c"},
+            .desc = "background color - rgba, eg. 0x00FF00FF is Green",
+            .type = cli::FLAG_STR,
+            .required = 0,
+            .multiple = 0,
+            .default_value = { .str_value = "0x000000FF" }
+    });
 
     cmd->AddFlag(cli::Flag{
             .name = "width",
