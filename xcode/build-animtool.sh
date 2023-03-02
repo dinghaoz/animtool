@@ -15,7 +15,7 @@ then
   PLATFORM=SIMULATOR64
 fi
 
-PATH=/opt/homebrew/bin/:$PATH
+PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
 
 echo $PATH
 
