@@ -41,17 +41,6 @@ add_library(giflib STATIC
         ${gif_SOURCE_DIR}/quantize.c
         )
 
-#CPMAddPackage(
-#        NAME jpeg
-#        VERSION 0.0.1
-#        URL "https://github.com/dinghaoz/libjpeg-cmake/archive/refs/tags/0.0.1.tar.gz"
-#        OPTIONS
-#        "BUILD_SHARED_LIBS OFF"
-#        "BUILD_EXECUTABLES OFF"
-#        "BUILD_ALT_UI OFF"
-#        "BUILD_TESTS OFF"
-#        "BUILD_STATIC_LIBS ON"
-#        )
 
 CPMAddPackage(
         NAME jpeg
@@ -150,7 +139,7 @@ add_library(animtoolcore STATIC
         core/animrun.cpp
         core/gifrun.cpp
         core/imgrun.cpp
-        core/quantizer.cpp core/blur.cpp core/blur.h core/cg.h)
+        core/quantizer.cpp core/blur.cpp core/blur.h core/cg.h core/picutils.cpp core/picutils.h)
 
 target_include_directories(animtoolcore PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux giflib jpeg ${IMAGE_CODEC_LIBRARIES})
