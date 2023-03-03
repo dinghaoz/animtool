@@ -166,7 +166,7 @@ void PicToRGB(WebPPicture* pic, unsigned char* rgb) {
     for (int y=0; y<pic->height; ++y) {
         for (int x=0; x<pic->width; ++x) {
             auto color = cg::RGBA::FromARGB(pic->argb[y * pic->argb_stride + x]);
-            auto pix = y * pic->width + x;
+            auto pix = (y * pic->width + x) * 3;
             rgb[pix] = color.r;
             rgb[pix + 1] = color.g;
             rgb[pix + 2] = color.b;
@@ -178,7 +178,7 @@ void RGBToPic(unsigned char* rgb, WebPPicture* pic) {
     for (int y=0; y<pic->height; ++y) {
         for (int x=0; x<pic->width; ++x) {
             auto color = cg::RGBA::FromARGB(pic->argb[y * pic->argb_stride + x]);
-            auto pix = y * pic->width + x;
+            auto pix = (y * pic->width + x) * 3;
             pic->argb[y * pic->argb_stride + x] = cg::RGBA(rgb[pix], rgb[pix+1], rgb[pix+2], color.a).ToARGB();
         }
     }
@@ -188,10 +188,11 @@ void RGBToPic(unsigned char* rgb, WebPPicture* pic) {
 static int PicBlur(WebPPicture* pic, int radius) {
     auto rgb = reinterpret_cast<unsigned char*>(malloc(pic->width * pic->height * 3));
     check(rgb);
-
     defer(free(rgb));
+
     PicToRGB(pic, rgb);
     GaussianBlur(rgb, pic->width, pic->height, 3, radius);
+    //superFastBlur(rgb, pic->width, pic->height, 5);
     RGBToPic(rgb, pic);
 
     return 1;
