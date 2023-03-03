@@ -38,10 +38,26 @@ public func DropFrames(
   }
 }
 
+public enum Background {
+  case file(String)
+  case color(String)
+  case frame(Int)
+
+  func toStr() -> String {
+    switch self {
+    case .file(let f): return "file\(f)"
+    case .color(let c): return "color:\(c)"
+    case .frame(let i): return "frame:\(i)"
+    }
+  }
+}
+
 public func Animate(
   inputs: [String],
+  background: Background,
+  backgroundBlurRadius: Int,
+  canvasSize: CGSize,
   duration: Int,
-  dstSize: CGSize,
   output: String
 ) throws {
   let paths = inputs.map {
@@ -54,12 +70,15 @@ public func Animate(
     }
   }
 
+
   if AnimToolAnimateLite(
     paths,
     Int32(inputs.count),
+    background.toStr().cString(using: .utf8),
+    backgroundBlurRadius,
+    Int32(canvasSize.width),
+    Int32(canvasSize.height),
     Int32(duration),
-    Int32(dstSize.width),
-    Int32(dstSize.height),
     output.cString(using: .utf8)
   ) == 0 {
     throw AnimToolError.failed
