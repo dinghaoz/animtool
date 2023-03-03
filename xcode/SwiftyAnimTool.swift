@@ -75,7 +75,7 @@ public func Animate(
     paths,
     Int32(inputs.count),
     background.toStr().cString(using: .utf8),
-    backgroundBlurRadius,
+    Int32(backgroundBlurRadius),
     Int32(canvasSize.width),
     Int32(canvasSize.height),
     Int32(duration),
