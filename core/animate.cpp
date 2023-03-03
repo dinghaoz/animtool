@@ -15,6 +15,9 @@
 #include "check.h"
 #include "utils/defer.h"
 
+#include <algorithm>
+#include <cmath>
+
 static void SetColor(WebPPicture* pic, uint32_t color) {
 
     for (int y=0; y<pic->height; ++y) {
@@ -57,6 +60,30 @@ static int DrawOverFit(WebPPicture* dst, WebPPicture* src) {
     logger::d("fit_rect %d:%d:%d:%d", fit_rect.origin.x, fit_rect.origin.y, fit_rect.size.width, fit_rect.size.height);
     check(WebPPictureRescale(src, fit_rect.size.width, fit_rect.size.height));
     check(Draw(dst, src, fit_rect.origin));
+
+    return 1;
+}
+
+static int PicFill(WebPPicture* pic, cg::Size dst) {
+    if (pic->width == dst.width && pic->height == dst.height) {
+        return 1;
+    }
+
+    auto rv_fit_rect = cg::FitTo(
+            cg::Size {.width = pic->width, .height = pic->height},
+            cg::Size {.width = dst.width, .height = dst.height}
+    );
+
+    auto scale_factor = dst.width / static_cast<float>(rv_fit_rect.size.width);
+
+    check(WebPPictureRescale(pic, static_cast<int>(round(pic->width * scale_factor)), static_cast<int>(round(pic->height * scale_factor))));
+
+    auto crop_rect = cg::FitTo(
+            cg::Size {.width = pic->width, .height = pic->height },
+            dst
+    );
+
+    check(WebPPictureCrop(pic, crop_rect.Left(), crop_rect.Top(), dst.width, dst.height));
 
     return 1;
 }
@@ -158,11 +185,94 @@ void RGBToPic(unsigned char* rgb, WebPPicture* pic) {
 }
 
 
+static int PicBlur(WebPPicture* pic, int radius) {
+    auto rgb = reinterpret_cast<unsigned char*>(malloc(pic->width * pic->height * 3));
+    check(rgb);
+
+    defer(free(rgb));
+    PicToRGB(pic, rgb);
+    GaussianBlur(rgb, pic->width, pic->height, 3, radius);
+    RGBToPic(rgb, pic);
+
+    return 1;
+}
+
+
+static int BackgroundInit(WebPPicture* pic,
+    const char* const image_paths[],
+    int n_images,
+    const char* background,
+    int bg_blur_radius,
+    int width,
+    int height) {
+
+    require(n_images > 0);
+    auto colon = strchr(background, ':');
+    require(colon);
+    char bg_type[256] = {};
+    strncpy(bg_type, background, std::min(static_cast<int>(sizeof(bg_type)), static_cast<int>(colon - background)));
+
+    logger::d("bg_type %s", bg_type);
+    pic->use_argb = 1;
+
+    auto bg_content = colon + 1;
+
+    cg::Size canvas_size {};
+    if (width == 0 || height == 0) {
+        if (!strcmp(bg_type, "file")) {
+            check(WebPPictureInitWithFile(pic, bg_content));
+            logger::d("implied size from bg %d:%d", pic->width, pic->height);
+        } else {
+            check(WebPPictureInitWithFile(pic, image_paths[0]));
+            logger::d("implied size from first frame %d:%d", pic->width, pic->height);
+        }
+
+        canvas_size.width = pic->width;
+        canvas_size.height = pic->height;
+    } else {
+        canvas_size.width = width;
+        canvas_size.height = height;
+    }
+
+
+    if (!strcmp(bg_type, "file")) {
+        if (pic->width == 0) {
+            check(WebPPictureInitWithFile(pic, bg_content));
+        }
+        check(PicFill(pic, canvas_size));
+        if (bg_blur_radius > 0) {
+            check(PicBlur(pic, bg_blur_radius));
+        }
+    } else if (!strcmp(bg_type, "frame")) {
+        auto frame_idx = atoi(bg_content);
+        require(frame_idx < n_images);
+        WebPPictureFree(pic);
+        check(WebPPictureInitWithFile(pic, image_paths[frame_idx]));
+
+        check(PicFill(pic, canvas_size));
+
+        if (bg_blur_radius > 0) {
+            check(PicBlur(pic, bg_blur_radius));
+        }
+    } else if (!strcmp(bg_type, "color")) {
+        pic->width = width;
+        pic->height = height;
+
+        check(WebPPictureAlloc(pic));
+        SetColor(pic, cg::RGBA::FromRGBA(RGBAFrom(bg_content)).ToARGB());
+    } else {
+        notreached("Unrecognized type: %s", bg_type);
+    }
+
+    return 1;
+}
+
+
 int AnimToolAnimate(
         const char* const image_paths[],
         int n_images,
         const char* background,
-        const char* bg_color_str,
+        int bg_blur_radius,
         int width,
         int height,
         int duration,
@@ -193,64 +303,13 @@ int AnimToolAnimate(
         .pass = pass
     };
 
+    logger::d("bg_blur_radius %d", bg_blur_radius);
 
-    auto bg_color = cg::RGBA::FromRGBA(RGBAFrom(bg_color_str));
 
-    logger::d("bg_color ARGB %x", bg_color.ToARGB());
-    if (width == 0 || height == 0) {
-        if (background) {
-            WebPPicture bg;
-            check(WebPPictureInit(&bg));
-            defer(WebPPictureFree(&bg));
-            bg.use_argb = 1;
-
-            check(WebPPictureInitWithFile(&bg, background));
-            width = bg.width;
-            height = bg.height;
-            logger::d("implied size from bg %d:%d", width, height);
-        } else {
-
-            WebPPicture first_image;
-            check(WebPPictureInit(&first_image));
-            defer(WebPPictureFree(&first_image));
-            first_image.use_argb = 1;
-
-            check(WebPPictureInitWithFile(&first_image, image_paths[0]));
-            width = first_image.width;
-            height = first_image.height;
-            logger::d("implied size from first frame %d:%d", width, height);
-        }
-    }
-
-    WebPPicture model;
-    check(WebPPictureInit(&model));
-    defer(WebPPictureFree(&model));
-    model.use_argb = 1;
-    model.width = width;
-    model.height = height;
-    check(WebPPictureAlloc(&model));
-
-    if (bg_color.a > 0) {
-        SetColor(&model, bg_color.ToARGB());
-    }
-
-    if (background) {
-        WebPPicture bg;
-        check(WebPPictureInit(&bg));
-        defer(WebPPictureFree(&bg));
-        bg.use_argb = 1;
-
-        check(WebPPictureInitWithFile(&bg, background));
-
-        logger::d("do blur %d:%d", bg.width, bg.height);
-        auto rgb = reinterpret_cast<unsigned char*>(malloc(bg.width * bg.height * 3));
-        defer(free(rgb));
-        PicToRGB(&bg, rgb);
-        GaussianBlur(rgb, bg.width, bg.height, 3, 8);
-        RGBToPic(rgb, &bg);
-
-        check(DrawOverFit(&model, &bg));
-    }
+    WebPPicture bg;
+    check(WebPPictureInit(&bg));
+    defer(WebPPictureFree(&bg));
+    check(BackgroundInit(&bg, image_paths, n_images, background, bg_blur_radius, width, height));
 
 
     auto encoder = AnimEncoderNew(format, width, height, &encoder_options);
@@ -273,7 +332,7 @@ int AnimToolAnimate(
         pic.use_argb = 1;
         check(WebPPictureInitWithFile(&pic, image_paths[i]));
 
-        check(WebPPictureCopy(&model, &canvas));
+        check(WebPPictureCopy(&bg, &canvas));
         check(DrawOverFit(&canvas, &pic));
 
         auto end_ts = total_duration_so_far + duration;
@@ -292,14 +351,14 @@ int AnimToolAnimateLite(
         const char*const image_paths[],
         int n_images,
         const char* background,
-        const char* bg_color_str,
+        int bg_blur_radius,
         int width,
         int height,
         int duration,
         const char* output
 ) {
     return AnimToolAnimate(
-            image_paths, n_images, background, bg_color_str, width, height, duration, output, "webp",
+            image_paths, n_images, background, bg_blur_radius, width, height, duration, output, "webp",
 
             0, // minimize_size
             0, // verbose

@@ -19,7 +19,7 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
             cmd->args,
             cmd->n_args,
             cmd->GetStr("background"),
-            cmd->GetStr("background_color"),
+            cmd->GetInt("background_blur_radius"),
             cmd->GetInt("width"),
             cmd->GetInt("height"),
             cmd->GetInt("duration"),
@@ -58,20 +58,21 @@ void CmdAnimateInit(cli::Cmd* cmd) {
     cmd->AddFlag(cli::Flag{
             .name = "background",
             .aliases = {"b"},
-            .desc = "background image",
-            .type = cli::FLAG_STR,
-            .required = 0,
-            .multiple = 0
-    });
-
-    cmd->AddFlag(cli::Flag{
-            .name = "background_color",
-            .aliases = {"c"},
-            .desc = "background color - rgba, eg. 0x00FF00FF is Green",
+            .desc = "background. format is type:content. e.g file:path/to/the/file, color:0xFF0000FF, frame:0",
             .type = cli::FLAG_STR,
             .required = 0,
             .multiple = 0,
-            .default_value = { .str_value = "0x000000FF" }
+            .default_value = { .str_value = "color:0x000000FF" }
+    });
+
+    cmd->AddFlag(cli::Flag{
+            .name = "background_blur_radius",
+            .aliases = {"c"},
+            .desc = "background blur radius",
+            .type = cli::FLAG_INT,
+            .required = 0,
+            .multiple = 0,
+            .default_value = { .int_value = 0 }
     });
 
     cmd->AddFlag(cli::Flag{

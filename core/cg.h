@@ -37,6 +37,14 @@ namespace cg {
         int Bottom() const {
             return origin.y + size.height;
         }
+
+        int Width() const {
+            return size.width;
+        }
+
+        int Height() const {
+            return size.height;
+        }
     };
 
 
