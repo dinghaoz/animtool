@@ -5,13 +5,13 @@
 #include "animate.h"
 #include "animenc.h"
 
-#include "../imageio/image_enc.h"
 #include "../imageio/imageio_util.h"
 #include "../imageio/image_dec.h"
 #include "webp/encode.h"
 #include "webp/demux.h"
 
-
+#include "cg.h"
+#include "blur.h"
 #include "check.h"
 #include "utils/defer.h"
 
@@ -22,114 +22,6 @@ static void SetColor(WebPPicture* pic, uint32_t color) {
         for (int x=0; x<pic->width; ++x) {
             argb_line[x] = color;
         }
-    }
-}
-
-namespace cg {
-    struct Point {
-        int x;
-        int y;
-    };
-
-    struct Size {
-        int width;
-        int height;
-    };
-
-    struct Rect {
-        Point origin;
-        Size size;
-
-        int Left() const {
-            return origin.x;
-        }
-
-        int Top() const {
-            return origin.y;
-        }
-
-        int Right() const {
-            return origin.x + size.width;
-        }
-
-        int Bottom() const {
-            return origin.y + size.height;
-        }
-    };
-
-
-    Rect FitTo(Size constraint, Size size) {
-        if (constraint.width * size.height < constraint.height * size.width) {
-            Size ret_size = {
-                    .width = constraint.width,
-                    .height = size.height * constraint.width / size.width
-            };
-            return Rect {
-                    .origin = {
-                            .x = 0,
-                            .y = (constraint.height - ret_size.height) / 2
-                    },
-                    .size = ret_size
-            };
-        } else {
-            Size ret_size = {
-                    .width = size.width * constraint.height /size.height,
-                    .height = constraint.height
-            };
-            return Rect {
-                    .origin = {
-                            .x = (constraint.width - ret_size.width) / 2,
-                            .y = 0
-                    },
-                    .size = ret_size
-            };
-        }
-    }
-
-    struct RGBA {
-        static RGBA FromRGBA(uint32_t rgba) {
-            return RGBA((rgba >> 24) & 0x000000FF, (rgba >> 16) & 0x000000FF, (rgba >> 8) & 0x000000FF, (rgba >> 0) & 0x000000FF);
-        }
-
-        static RGBA FromARGB(uint32_t argb) {
-            return RGBA((argb >> 16) & 0x000000FF, (argb >> 8) & 0x000000FF, (argb >> 0) & 0x000000FF, (argb >> 24) & 0x000000FF);
-        }
-        RGBA(uint8_t r, uint8_t g, uint8_t b, uint8_t a): r(r), g(g), b(b), a(a) {}
-        RGBA(const RGBA& other): r(other.r), g(other.g), b(other.b), a(other.a) {}
-        RGBA& operator=(const RGBA& other) {
-            r = other.r;
-            g = other.g;
-            b = other.b;
-            a = other.a;
-            return *this;
-        }
-        uint8_t r;
-        uint8_t g;
-        uint8_t b;
-        uint8_t a;
-
-        uint32_t ToARGB() const {
-            return (static_cast<uint32_t>(a) << 24) |
-                    (static_cast<uint32_t>(r) << 16) |
-                    (static_cast<uint32_t>(g) << 8) |
-                    (static_cast<uint32_t>(b) << 0);
-        }
-    };
-
-    static RGBA Blend(RGBA bottom, RGBA top) {
-        auto alpha_bottom = bottom.a / 255.0f;
-        auto alpha_top = top.a / 255.0f;
-
-        auto alpha = alpha_bottom + alpha_top - alpha_top * alpha_bottom;
-        if (alpha == 0) {
-            return RGBA::FromARGB(0);
-        }
-
-        auto r = (top.r*alpha_top + bottom.r*alpha_bottom*(1 - alpha_top)) / alpha;
-        auto g = (top.g*alpha_top + bottom.g*alpha_bottom*(1 - alpha_top)) / alpha;
-        auto b = (top.b*alpha_top + bottom.b*alpha_bottom*(1 - alpha_top)) / alpha;
-
-        return RGBA(static_cast<uint8_t>(r), static_cast<uint8_t>(g), static_cast<uint8_t>(b), static_cast<uint8_t>(alpha * 255));
     }
 }
 
@@ -222,6 +114,50 @@ static uint32_t RGBAFrom(const char* color_str) {
 }
 
 
+cg::RGBA PicGetColor(void* ctx, int i_pix) {
+    auto pic = reinterpret_cast<WebPPicture*>(ctx);
+
+    int y = i_pix /pic->height;
+    int x = i_pix % pic->width;
+
+    int pos = y * pic->argb_stride + x;
+    return cg::RGBA::FromARGB(pic->argb[pos]);
+}
+
+void PicSetColor(void* ctx, int i_pix, cg::RGBA color) {
+    auto pic = reinterpret_cast<WebPPicture*>(ctx);
+
+    int y = i_pix /pic->height;
+    int x = i_pix % pic->width;
+
+    int pos = y * pic->argb_stride + x;
+
+    pic->argb[pos] = color.ToARGB();
+}
+
+void PicToRGB(WebPPicture* pic, unsigned char* rgb) {
+    for (int y=0; y<pic->height; ++y) {
+        for (int x=0; x<pic->width; ++x) {
+            auto color = cg::RGBA::FromARGB(pic->argb[y * pic->argb_stride + x]);
+            auto pix = y * pic->width + x;
+            rgb[pix] = color.r;
+            rgb[pix + 1] = color.g;
+            rgb[pix + 2] = color.b;
+        }
+    }
+}
+
+void RGBToPic(unsigned char* rgb, WebPPicture* pic) {
+    for (int y=0; y<pic->height; ++y) {
+        for (int x=0; x<pic->width; ++x) {
+            auto color = cg::RGBA::FromARGB(pic->argb[y * pic->argb_stride + x]);
+            auto pix = y * pic->width + x;
+            pic->argb[y * pic->argb_stride + x] = cg::RGBA(rgb[pix], rgb[pix+1], rgb[pix+2], color.a).ToARGB();
+        }
+    }
+}
+
+
 int AnimToolAnimate(
         const char* const image_paths[],
         int n_images,
@@ -305,6 +241,13 @@ int AnimToolAnimate(
         bg.use_argb = 1;
 
         check(WebPPictureInitWithFile(&bg, background));
+
+        logger::d("do blur %d:%d", bg.width, bg.height);
+        auto rgb = reinterpret_cast<unsigned char*>(malloc(bg.width * bg.height * 3));
+        defer(free(rgb));
+        PicToRGB(&bg, rgb);
+        GaussianBlur(rgb, bg.width, bg.height, 3, 8);
+        RGBToPic(rgb, &bg);
 
         check(DrawOverFit(&model, &bg));
     }
