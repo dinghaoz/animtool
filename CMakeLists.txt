@@ -46,6 +46,7 @@ CPMAddPackage(
         NAME jpegsrc
         VERSION 9e
         URL "https://www.ijg.org/files/jpegsrc.v9e.tar.gz"
+        URL_HASH SHA1=ed959b5f3551bc965fe6d0aff6ca48a26f8ce346
         DOWNLOAD_ONLY YES
 )
 
@@ -86,40 +87,27 @@ CPMAddPackage(
         "BUILD_ALT_UI OFF"
 )
 
+CPMAddPackage(
+        NAME png
+        VERSION 1.6.39
+        URL "https://download.sourceforge.net/libpng/libpng-1.6.39.tar.gz"
+        URL_HASH SHA256=af4fb7f260f839919e5958e5ab01a275d4fe436d45442a36ee62f73e5beb75ba
+        OPTIONS
+        "PNG_EXECUTABLES OFF"
+        "PNG_TESTS OFF"
+)
 
-#function(CPMAddPackageWith)
-#endfunction()
-##
-### Build libjpeg
-#set(BUILD_EXECUTABLES OFF)
-#set(BUILD_ALT_UI OFF)
-#set(BUILD_TESTS OFF)
-#add_subdirectory(${jpeg_SOURCE_DIR})
-
+configure_file(
+        ${png_SOURCE_DIR}/scripts/pnglibconf.h.prebuilt
+        ${png_SOURCE_DIR}/pnglibconf.h
+        COPYONLY
+)
 
 
 add_definitions(-DWEBP_HAVE_GIF)
 add_definitions(-DWEBP_HAVE_JPEG)
+add_definitions(-DWEBP_HAVE_PNG)
 
-set(IMAGE_CODEC_LIBRARIES)
-set(IMAGE_CODEC_INCLUDE_DIRS)
-
-#find_package(PNG)
-#
-#if(PNG_FOUND)
-#    add_definitions(-DWEBP_HAVE_PNG)
-#    list(APPEND IMAGE_CODEC_INCLUDE_DIRS ${PNG_INCLUDE_DIR})
-#    list(APPEND IMAGE_CODEC_LIBRARIES ${PNG_LIBRARIES})
-#endif()
-
-
-#find_package(JPEG)
-#
-#if(JPEG_FOUND)
-#    add_definitions(-DWEBP_HAVE_JPEG)
-#    list(APPEND IMAGE_CODEC_INCLUDE_DIRS ${JPEG_INCLUDE_DIR})
-#    list(APPEND IMAGE_CODEC_LIBRARIES ${JPEG_LIBRARIES})
-#endif()
 
 add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/examples/gifdec.c
@@ -134,8 +122,8 @@ add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/imageio/metadata.c
         ${webp_SOURCE_DIR}/imageio/pnmdec.c
         )
-target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${jpeg_SOURCE_DIR} ${gif_SOURCE_DIR} ${IMAGE_CODEC_INCLUDE_DIRS})
-target_link_libraries(webp_imageio jpeg giflib)
+target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${jpeg_SOURCE_DIR} ${gif_SOURCE_DIR} ${png_SOURCE_DIR})
+target_link_libraries(webp_imageio jpeg giflib png)
 
 if(${CMAKE_GENERATOR} STREQUAL "Xcode")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
