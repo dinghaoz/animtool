@@ -44,46 +44,43 @@ add_library(giflib STATIC
 
 CPMAddPackage(
         NAME jpeg
-        VERSION 0.0.2
-        URL "https://github.com/dinghaoz/libjpeg-cmake/archive/refs/tags/0.0.2.tar.gz"
-        OPTIONS
-        "BUILD_SHARED_LIBS OFF"
-        "BUILD_EXECUTABLES OFF"
-        "BUILD_ALT_UI OFF"
-        "BUILD_TESTS OFF"
-        "BUILD_STATIC_LIBS ON"
+        VERSION 9e
+        URL "https://www.ijg.org/files/jpegsrc.v9e.tar.gz"
 )
 
-## Use configure_file insted of file(COPY)
+## Use configure_file instead of file(COPY)
 ## to ensure files are updated in src directory
-#configure_file(
-#        resources/CMakeLists.txt
-#        ${jpeg_SOURCE_DIR}/CMakeLists.txt
-#        COPYONLY
-#)
-#configure_file(
-#        resources/ConfigureJConfig.cmake
-#        ${jpeg_SOURCE_DIR}/ConfigureJConfig.cmake
-#        COPYONLY
-#)
-#configure_file(
-#        resources/jconfig.h.in
-#        ${jpeg_SOURCE_DIR}/jconfig.h.in
-#        COPYONLY
-#)
-#configure_file(
-#        resources/libjpeg.pc.cmakein
-#        ${jpeg_SOURCE_DIR}/libjpeg.pc.cmakein
-#        COPYONLY
-#)
-#configure_file(
-#        resources/libjpeg.la.in
-#        ${jpeg_SOURCE_DIR}/libjpeg.la.in
-#        COPYONLY
-#)
+configure_file(
+        dep/jpeg/CMakeLists.txt
+        ${jpeg_SOURCE_DIR}/CMakeLists.txt
+        COPYONLY
+)
+configure_file(
+        dep/jpeg/ConfigureJConfig.cmake
+        ${jpeg_SOURCE_DIR}/ConfigureJConfig.cmake
+        COPYONLY
+)
+configure_file(
+        dep/jpeg/jconfig.h.in
+        ${jpeg_SOURCE_DIR}/jconfig.h.in
+        COPYONLY
+)
+configure_file(
+        dep/jpeg/libjpeg.pc.cmakein
+        ${jpeg_SOURCE_DIR}/libjpeg.pc.cmakein
+        COPYONLY
+)
+configure_file(
+        dep/jpeg/libjpeg.la.in
+        ${jpeg_SOURCE_DIR}/libjpeg.la.in
+        COPYONLY
+)
 #
 ## Build libjpeg
-#add_subdirectory(${jpeg_SOURCE_DIR})
+set(BUILD_EXECUTABLES OFF)
+set(BUILD_ALT_UI OFF)
+set(BUILD_TESTS OFF)
+add_subdirectory(${jpeg_SOURCE_DIR})
 
 
 
@@ -124,7 +121,7 @@ add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/imageio/pnmdec.c
         )
 target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${jpeg_SOURCE_DIR} ${gif_SOURCE_DIR} ${IMAGE_CODEC_INCLUDE_DIRS})
-
+target_link_libraries(webp_imageio jpeg giflib)
 
 if(${CMAKE_GENERATOR} STREQUAL "Xcode")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
@@ -142,7 +139,7 @@ add_library(animtoolcore STATIC
         core/quantizer.cpp core/blur.cpp core/blur.h core/cg.h core/picutils.cpp core/picutils.h)
 
 target_include_directories(animtoolcore PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
-target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux giflib jpeg ${IMAGE_CODEC_LIBRARIES})
+target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux ${IMAGE_CODEC_LIBRARIES})
 
 if(NOT ${CMAKE_GENERATOR} STREQUAL "Xcode")
   add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp app/animate_cmd.cpp)
