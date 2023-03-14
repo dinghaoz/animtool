@@ -43,44 +43,58 @@ add_library(giflib STATIC
 
 
 CPMAddPackage(
-        NAME jpeg
+        NAME jpegsrc
         VERSION 9e
         URL "https://www.ijg.org/files/jpegsrc.v9e.tar.gz"
+        DOWNLOAD_ONLY YES
 )
 
 ## Use configure_file instead of file(COPY)
 ## to ensure files are updated in src directory
 configure_file(
         dep/jpeg/CMakeLists.txt
-        ${jpeg_SOURCE_DIR}/CMakeLists.txt
+        ${jpegsrc_SOURCE_DIR}/CMakeLists.txt
         COPYONLY
 )
 configure_file(
         dep/jpeg/ConfigureJConfig.cmake
-        ${jpeg_SOURCE_DIR}/ConfigureJConfig.cmake
+        ${jpegsrc_SOURCE_DIR}/ConfigureJConfig.cmake
         COPYONLY
 )
 configure_file(
         dep/jpeg/jconfig.h.in
-        ${jpeg_SOURCE_DIR}/jconfig.h.in
+        ${jpegsrc_SOURCE_DIR}/jconfig.h.in
         COPYONLY
 )
 configure_file(
         dep/jpeg/libjpeg.pc.cmakein
-        ${jpeg_SOURCE_DIR}/libjpeg.pc.cmakein
+        ${jpegsrc_SOURCE_DIR}/libjpeg.pc.cmakein
         COPYONLY
 )
 configure_file(
         dep/jpeg/libjpeg.la.in
-        ${jpeg_SOURCE_DIR}/libjpeg.la.in
+        ${jpegsrc_SOURCE_DIR}/libjpeg.la.in
         COPYONLY
 )
-#
-## Build libjpeg
-set(BUILD_EXECUTABLES OFF)
-set(BUILD_ALT_UI OFF)
-set(BUILD_TESTS OFF)
-add_subdirectory(${jpeg_SOURCE_DIR})
+CPMAddPackage(
+        NAME jpeg
+        VERSION 9e
+        SOURCE_DIR ${jpegsrc_SOURCE_DIR}
+        OPTIONS
+        "BUILD_EXECUTABLES OFF"
+        "BUILD_TESTS OFF"
+        "BUILD_ALT_UI OFF"
+)
+
+
+#function(CPMAddPackageWith)
+#endfunction()
+##
+### Build libjpeg
+#set(BUILD_EXECUTABLES OFF)
+#set(BUILD_ALT_UI OFF)
+#set(BUILD_TESTS OFF)
+#add_subdirectory(${jpeg_SOURCE_DIR})
 
 
 
