@@ -6,6 +6,7 @@
 #define ANIMTOOL_CG_H
 
 #include <stdlib.h>
+#include <cstdint>
 
 namespace cg {
     struct Point {
