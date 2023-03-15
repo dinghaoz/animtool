@@ -45,7 +45,7 @@ public enum Background {
 
   func toStr() -> String {
     switch self {
-    case .file(let f): return "file\(f)"
+    case .file(let f): return "file:\(f)"
     case .color(let c): return "color:\(c)"
     case .frame(let i): return "frame:\(i)"
     }
