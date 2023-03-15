@@ -5,6 +5,7 @@
 #include "blur.h"
 #include <stdlib.h>
 #include <algorithm>
+#include <cstring>
 
 using namespace std;
 void superFastBlur(unsigned char *pix, int w, int h, int radius)
