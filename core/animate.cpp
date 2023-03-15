@@ -120,7 +120,7 @@ static int BackgroundInit(WebPPicture* pic,
         pic->height = height;
 
         check(WebPPictureAlloc(pic));
-        PicClear(pic, cg::RGBA::FromRGBA(RGBAFrom(bg_content)));
+        PicClear(pic, cg::Color::FromRGBA(RGBAFrom(bg_content)));
     } else {
         notreached("Unrecognized type: %s", bg_type);
     }

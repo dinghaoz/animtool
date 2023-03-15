@@ -77,17 +77,17 @@ namespace cg {
         }
     }
 
-    struct RGBA {
-        static RGBA FromRGBA(uint32_t rgba) {
-            return RGBA((rgba >> 24) & 0x000000FF, (rgba >> 16) & 0x000000FF, (rgba >> 8) & 0x000000FF, (rgba >> 0) & 0x000000FF);
+    struct Color {
+        static Color FromRGBA(uint32_t rgba) {
+            return Color((rgba >> 24) & 0x000000FF, (rgba >> 16) & 0x000000FF, (rgba >> 8) & 0x000000FF, (rgba >> 0) & 0x000000FF);
         }
 
-        static RGBA FromARGB(uint32_t argb) {
-            return RGBA((argb >> 16) & 0x000000FF, (argb >> 8) & 0x000000FF, (argb >> 0) & 0x000000FF, (argb >> 24) & 0x000000FF);
+        static Color FromARGB(uint32_t argb) {
+            return Color((argb >> 16) & 0x000000FF, (argb >> 8) & 0x000000FF, (argb >> 0) & 0x000000FF, (argb >> 24) & 0x000000FF);
         }
-        RGBA(uint8_t r, uint8_t g, uint8_t b, uint8_t a): r(r), g(g), b(b), a(a) {}
-        RGBA(const RGBA& other): r(other.r), g(other.g), b(other.b), a(other.a) {}
-        RGBA& operator=(const RGBA& other) {
+        Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a): r(r), g(g), b(b), a(a) {}
+        Color(const Color& other): r(other.r), g(other.g), b(other.b), a(other.a) {}
+        Color& operator=(const Color& other) {
             r = other.r;
             g = other.g;
             b = other.b;
@@ -107,20 +107,20 @@ namespace cg {
         }
     };
 
-    static inline RGBA Blend(RGBA bottom, RGBA top) {
+    static inline Color Blend(Color bottom, Color top) {
         auto alpha_bottom = bottom.a / 255.0f;
         auto alpha_top = top.a / 255.0f;
 
         auto alpha = alpha_bottom + alpha_top - alpha_top * alpha_bottom;
         if (alpha == 0) {
-            return RGBA::FromARGB(0);
+            return Color::FromARGB(0);
         }
 
         auto r = (top.r*alpha_top + bottom.r*alpha_bottom*(1 - alpha_top)) / alpha;
         auto g = (top.g*alpha_top + bottom.g*alpha_bottom*(1 - alpha_top)) / alpha;
         auto b = (top.b*alpha_top + bottom.b*alpha_bottom*(1 - alpha_top)) / alpha;
 
-        return RGBA(static_cast<uint8_t>(r), static_cast<uint8_t>(g), static_cast<uint8_t>(b), static_cast<uint8_t>(alpha * 255));
+        return Color(static_cast<uint8_t>(r), static_cast<uint8_t>(g), static_cast<uint8_t>(b), static_cast<uint8_t>(alpha * 255));
     }
 }
 

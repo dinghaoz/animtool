@@ -17,7 +17,7 @@
 
 #include <cmath>
 
-void PicClear(WebPPicture* pic, cg::RGBA color) {
+void PicClear(WebPPicture* pic, cg::Color color) {
 
     for (int y=0; y<pic->height; ++y) {
         auto argb_line = pic->argb + pic->argb_stride * y;
@@ -41,7 +41,7 @@ int PicDraw(WebPPicture* dst, const WebPPicture* src, cg::Point point) {
             auto dst_y = y + point.y;
             auto dst_pixel = dst->argb[dst_y * dst_stride + dst_x];
 
-            dst->argb[dst_y * dst_stride + dst_x] = cg::Blend(cg::RGBA::FromARGB(dst_pixel), cg::RGBA::FromARGB(src_pixel)).ToARGB();
+            dst->argb[dst_y * dst_stride + dst_x] = cg::Blend(cg::Color::FromARGB(dst_pixel), cg::Color::FromARGB(src_pixel)).ToARGB();
         }
     }
 
@@ -108,7 +108,7 @@ int PicInitWithFile(WebPPicture* pic, const char* path) {
 void PicToRGB(WebPPicture* pic, unsigned char* rgb) {
     for (int y=0; y<pic->height; ++y) {
         for (int x=0; x<pic->width; ++x) {
-            auto color = cg::RGBA::FromARGB(pic->argb[y * pic->argb_stride + x]);
+            auto color = cg::Color::FromARGB(pic->argb[y * pic->argb_stride + x]);
             auto pix = (y * pic->width + x) * 3;
             rgb[pix] = color.r;
             rgb[pix + 1] = color.g;
@@ -120,9 +120,9 @@ void PicToRGB(WebPPicture* pic, unsigned char* rgb) {
 void RGBToPic(unsigned char* rgb, WebPPicture* pic) {
     for (int y=0; y<pic->height; ++y) {
         for (int x=0; x<pic->width; ++x) {
-            auto color = cg::RGBA::FromARGB(pic->argb[y * pic->argb_stride + x]);
+            auto color = cg::Color::FromARGB(pic->argb[y * pic->argb_stride + x]);
             auto pix = (y * pic->width + x) * 3;
-            pic->argb[y * pic->argb_stride + x] = cg::RGBA(rgb[pix], rgb[pix+1], rgb[pix+2], color.a).ToARGB();
+            pic->argb[y * pic->argb_stride + x] = cg::Color(rgb[pix], rgb[pix + 1], rgb[pix + 2], color.a).ToARGB();
         }
     }
 }
