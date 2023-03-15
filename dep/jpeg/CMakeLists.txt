@@ -75,7 +75,7 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 if(BUILD_STATIC_LIBS)
-  add_library(jpeg_static STATIC $<TARGET_OBJECTS:jpeg_objs>)
+  add_library(jpeg_static STATIC ${SRCS})
   set_target_properties(jpeg_static
     PROPERTIES
       OUTPUT_NAME jpeg

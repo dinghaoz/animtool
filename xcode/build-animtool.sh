@@ -29,15 +29,20 @@ mkdir -p ${TARGET_BUILD_DIR}/cmake-products
 cmake -S ${PROJECT_DIR}/.. -B ${TARGET_BUILD_DIR}/cmake -GXcode -DCMAKE_TOOLCHAIN_FILE=${PROJECT_DIR}/../cmake/ios.toolchain.cmake -DPLATFORM=$PLATFORM -DENABLE_BITCODE=FALSE
 cmake --build ${TARGET_BUILD_DIR}/cmake --config ${CONFIGURATION}
 
-LIB_PATH_PARTS=("" /_deps/webp-build /_deps/jpeg-build)
+LIB_PATH_PARTS=("" /_deps/webp-build /_deps/jpeg-build /_deps/png-build)
 for i in "${LIB_PATH_PARTS[@]}"
 do
     LIB_PATH=${TARGET_BUILD_DIR}/cmake$i/${CONFIGURATION}$EFFECTIVE_PLATFORM_NAME
-	echo "$LIB_PATH"
+    echo "$LIB_PATH"
     for FILE_PATH in "$LIB_PATH"/*
     do
         FILE_NAME="$(basename "$FILE_PATH")"
-        rm -f ${TARGET_BUILD_DIR}/cmake-products/$FILE_NAME
-        ln -s $FILE_PATH ${TARGET_BUILD_DIR}/cmake-products/$FILE_NAME
+        if [[ $FILE_NAME == "*" ]]
+        then
+          echo "Empty dir $LIB_PATH"
+        else
+          rm -f ${TARGET_BUILD_DIR}/cmake-products/$FILE_NAME
+          ln -s $FILE_PATH ${TARGET_BUILD_DIR}/cmake-products/$FILE_NAME
+        fi
     done
 done

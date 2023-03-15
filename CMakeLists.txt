@@ -85,6 +85,7 @@ CPMAddPackage(
         "BUILD_EXECUTABLES OFF"
         "BUILD_TESTS OFF"
         "BUILD_ALT_UI OFF"
+        "BUILD_SHARED_LIBS OFF"
 )
 
 CPMAddPackage(
@@ -95,6 +96,7 @@ CPMAddPackage(
         OPTIONS
         "PNG_EXECUTABLES OFF"
         "PNG_TESTS OFF"
+        "PNG_SHARED OFF"
 )
 
 configure_file(
@@ -123,7 +125,7 @@ add_library(webp_imageio STATIC
         ${webp_SOURCE_DIR}/imageio/pnmdec.c
         )
 target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${jpeg_SOURCE_DIR} ${gif_SOURCE_DIR} ${png_SOURCE_DIR})
-target_link_libraries(webp_imageio jpeg giflib png)
+target_link_libraries(webp_imageio jpeg_static giflib png_static)
 
 if(${CMAKE_GENERATOR} STREQUAL "Xcode")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
