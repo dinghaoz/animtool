@@ -26,7 +26,7 @@ fi
 
 mkdir -p ${TARGET_BUILD_DIR}/cmake
 mkdir -p ${TARGET_BUILD_DIR}/cmake-products
-cmake -S ${PROJECT_DIR}/.. -B ${TARGET_BUILD_DIR}/cmake -GXcode -DCMAKE_TOOLCHAIN_FILE=${PROJECT_DIR}/../cmake/ios.toolchain.cmake -DPLATFORM=$PLATFORM -DENABLE_BITCODE=FALSE
+cmake -DBUILD_ANIMTOOL_EXECUTABLE=OFF -S ${PROJECT_DIR}/.. -B ${TARGET_BUILD_DIR}/cmake -GXcode -DCMAKE_TOOLCHAIN_FILE=${PROJECT_DIR}/../cmake/ios.toolchain.cmake -DPLATFORM=$PLATFORM -DENABLE_BITCODE=FALSE
 cmake --build ${TARGET_BUILD_DIR}/cmake --config ${CONFIGURATION}
 
 LIB_PATH_PARTS=("" /_deps/webp-build /_deps/jpeg-build /_deps/png-build)

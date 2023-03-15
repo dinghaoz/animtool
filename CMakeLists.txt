@@ -4,7 +4,7 @@ project(animtool C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-message(STATUS "CMAKE_GENERATOR = ${CMAKE_GENERATOR}")
+option(BUILD_ANIMTOOL_EXECUTABLE "Build animtool executable" ON)
 
 include(cmake/CPM.cmake)
 CPMAddPackage(NAME webp
@@ -127,9 +127,7 @@ add_library(webp_imageio STATIC
 target_include_directories(webp_imageio PRIVATE ${webp_SOURCE_DIR}/src ${jpeg_SOURCE_DIR} ${gif_SOURCE_DIR} ${png_SOURCE_DIR})
 target_link_libraries(webp_imageio jpeg_static giflib png_static)
 
-if(${CMAKE_GENERATOR} STREQUAL "Xcode")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
-endif()
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
 
 add_library(animtoolcore STATIC
         core/dropframes.cpp
@@ -143,9 +141,9 @@ add_library(animtoolcore STATIC
         core/quantizer.cpp core/blur.cpp core/blur.h core/cg.h core/picutils.cpp core/picutils.h)
 
 target_include_directories(animtoolcore PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
-target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux ${IMAGE_CODEC_LIBRARIES})
+target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux)
 
-if(NOT ${CMAKE_GENERATOR} STREQUAL "Xcode")
+if(BUILD_ANIMTOOL_EXECUTABLE)
   add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp app/animate_cmd.cpp)
   target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 
