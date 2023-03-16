@@ -2,9 +2,6 @@
 #include "core/dropframes.h"
 #include "core/logger.h"
 
-#ifdef HAVE_CONFIG_H
-#include "webp/config.h"
-#endif
 
 static const char* StrSearch(const char* pstart, const char* pend, const char* target) {
     const char* p = pstart;
@@ -351,7 +348,7 @@ void CmdDropFramesInit(cli::Cmd* cmd) {
         .aliases = {"T"},
         .desc = "A transform. Can have more than one. Format: "
                 "`left:top:width:height->width:height@file_name;width:height@file_name#format`. "
-                "`->` seperates the source rectangle and the destinations. "
+                "`->` separates the source rectangle and the destinations. "
                 "Source rectangle specifies how we crop the source image. "
                 "After the `->` mark, there are multiple destinations separated by `;`. "
                 "Each destination specifies the output image size and the name of the file. "

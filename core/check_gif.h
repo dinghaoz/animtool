@@ -7,10 +7,6 @@
 
 #include "logger.h"
 
-#ifdef HAVE_CONFIG_H
-#include "webp/config.h"
-#endif
-
 #ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"
 #include "../examples/gifdec.h"

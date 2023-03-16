@@ -3,9 +3,6 @@
 #include "webp/mux_types.h" // WebPData
 #include "webp/decode.h" // WebPGetInfo
 
-#ifdef HAVE_CONFIG_H
-#include "webp/config.h"
-#endif
 
 #ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"

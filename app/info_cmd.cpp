@@ -7,10 +7,6 @@
 #include "core/filefmt.h"
 #include "core/rawgif.h"
 
-#ifdef HAVE_CONFIG_H
-#include "webp/config.h"
-#endif
-
 #include "webp/mux_types.h" // WebPData
 #include "../imageio/imageio_util.h" // ImgIoUtilReadFile
 

@@ -7,14 +7,9 @@
 
 #include "webp/encode.h"
 #include "webp/mux.h"
-#include "../imageio/image_enc.h"
 #include "../imageio/imageio_util.h"
 
 #include "check_gif.h"
-
-#ifdef HAVE_CONFIG_H
-#include "webp/config.h"
-#endif
 
 #ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"
