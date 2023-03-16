@@ -49,11 +49,11 @@ namespace cg {
     };
 
 
-    static inline Rect FitTo(Size constraint, Size size) {
-        if (constraint.width * size.height < constraint.height * size.width) {
+    static inline Rect FitTo(Size constraint, Size ratio) {
+        if (constraint.width * ratio.height < constraint.height * ratio.width) {
             Size ret_size = {
                     .width = constraint.width,
-                    .height = size.height * constraint.width / size.width
+                    .height = ratio.height * constraint.width / ratio.width
             };
             return Rect {
                     .origin = {
@@ -64,7 +64,7 @@ namespace cg {
             };
         } else {
             Size ret_size = {
-                    .width = size.width * constraint.height /size.height,
+                    .width = ratio.width * constraint.height / ratio.height,
                     .height = constraint.height
             };
             return Rect {
