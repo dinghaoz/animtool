@@ -18,3 +18,4 @@ FOUNDATION_EXPORT const unsigned char SwiftyAnimToolVersionString[];
 
 #include "dropframes.h"
 #include "animate.h"
+#include "opacity.h"

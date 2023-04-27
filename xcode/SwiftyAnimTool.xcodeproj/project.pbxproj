@@ -10,6 +10,7 @@
 		C60B352429AF377900506D3C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C60B352329AF376300506D3C /* libc++.tbd */; };
 		C6BD8D0829C17DF600FD269A /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD8D0729C17DF600FD269A /* libpng.a */; };
 		C6BD8D0A29C17E7500FD269A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C6BD8D0929C17E7500FD269A /* libz.tbd */; };
+		C6DA3F9B29FA86CE008E091F /* opacity.h in Headers */ = {isa = PBXBuildFile; fileRef = C6DA3F9A29FA86CD008E091F /* opacity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C6E8A4D629AEFD9200F90E97 /* SwiftyAnimTool.h in Headers */ = {isa = PBXBuildFile; fileRef = C6E8A4D529AEFD9200F90E97 /* SwiftyAnimTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C6E8A4DE29AEFE1C00F90E97 /* SwiftyAnimTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6E8A4DD29AEFE1C00F90E97 /* SwiftyAnimTool.swift */; };
 		C6E8A4E129AEFE4300F90E97 /* dropframes.h in Headers */ = {isa = PBXBuildFile; fileRef = C6E8A4DF29AEFE4300F90E97 /* dropframes.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 		C60B353029AF3CFE00506D3C /* build-animtool.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-animtool.sh"; sourceTree = "<group>"; };
 		C6BD8D0729C17DF600FD269A /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = "../Debug-iphonesimulator/cmake-products/libpng.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BD8D0929C17E7500FD269A /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		C6DA3F9A29FA86CD008E091F /* opacity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = opacity.h; path = ../core/opacity.h; sourceTree = "<group>"; };
 		C6E8A4D229AEFD9200F90E97 /* SwiftyAnimTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyAnimTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6E8A4D529AEFD9200F90E97 /* SwiftyAnimTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyAnimTool.h; sourceTree = "<group>"; };
 		C6E8A4DD29AEFE1C00F90E97 /* SwiftyAnimTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyAnimTool.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				C60B353029AF3CFE00506D3C /* build-animtool.sh */,
 				C6E8A4E329AEFE6500F90E97 /* CMakeLists.txt */,
+				C6DA3F9A29FA86CD008E091F /* opacity.h */,
 				C6E8A4E029AEFE4300F90E97 /* animate.h */,
 				C6E8A4DF29AEFE4300F90E97 /* dropframes.h */,
 				C6E8A4DD29AEFE1C00F90E97 /* SwiftyAnimTool.swift */,
@@ -120,6 +123,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6DA3F9B29FA86CE008E091F /* opacity.h in Headers */,
 				C6E8A4D629AEFD9200F90E97 /* SwiftyAnimTool.h in Headers */,
 				C6E8A4E129AEFE4300F90E97 /* dropframes.h in Headers */,
 				C6E8A4E229AEFE4300F90E97 /* animate.h in Headers */,

@@ -84,3 +84,20 @@ public func Animate(
     throw AnimToolError.failed
   }
 }
+
+public func Opacity(
+  input: String,
+  sampleDivider: Int
+) throws -> Float {
+
+  var opacity: Float = 0
+  if AnimToolGetOpacity(
+    input.cString(using: .utf8),
+    Int32(sampleDivider),
+    &opacity) == 0 {
+    throw AnimToolError.failed
+  } else {
+    return opacity
+  }
+}
+
