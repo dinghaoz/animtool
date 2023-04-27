@@ -48,6 +48,7 @@ extern "C" {
 void AnimFrameInitWithRGBA(AnimFrame* frame, uint8_t *rgba, int width, int height);
 void AnimFrameInitWithPic(AnimFrame* frame, WebPPicture *pic);
 int AnimFrameExportToPic(const AnimFrame* frame, WebPPicture *pic);
+int AnimFrameGetOpacity(const AnimFrame* frame, float *out_opacity);
 
 #ifdef __cplusplus
 }

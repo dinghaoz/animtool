@@ -22,8 +22,10 @@
 
 struct Context {
     int detail;
+    int opacity;
     int frame_count;
     int total_duration;
+    float acc_opacity;
 };
 
 #define imginfo(fmt, ...) \
@@ -73,6 +75,12 @@ static int OnFrame(void* ctx, const AnimFrame* frame, int start_ts, int end_ts, 
     *stop = !thiz->detail;
 
     cli::StrBuilder sb {};
+    if (thiz->opacity) {
+        float opacity = 0;
+        check(AnimFrameGetOpacity(frame, &opacity));
+        sb.AddText(" opacity=%.2f", opacity);
+        thiz->acc_opacity += opacity;
+    }
 #ifdef WEBP_HAVE_GIF
     if (frame->raw_gif) {
         sb.AddText(" [GIF]");
@@ -106,6 +114,9 @@ static int OnEnd(void* ctx, const AnimInfo* anim_info) {
     require(thiz->detail);
 
     imginfo("Total duration %d", thiz->total_duration);
+    if (thiz->opacity) {
+        imginfo("Avg opacity %.2f", thiz->acc_opacity/ static_cast<float >(thiz->frame_count));
+    }
     if (anim_info->has_loop_count) {
         imginfo("Loop count %d", anim_info->loop_count);
     }
@@ -119,7 +130,7 @@ static AnimDecRunCallback kDropFramesCallback {
     .on_end = OnEnd
 };
 
-static int PrintInfo(const char* input, int detail) {
+static int PrintInfo(const char* input, int detail, int opacity) {
     WebPData webp_data;
     WebPDataInit(&webp_data);
     defer(WebPDataClear(&webp_data));
@@ -127,7 +138,8 @@ static int PrintInfo(const char* input, int detail) {
     check(ImgIoUtilReadFile(input, &webp_data.bytes, &webp_data.size));
 
     Context ctx{
-        .detail = detail
+        .detail = detail,
+        .opacity = opacity
     };
 
     if (IsWebP(&webp_data)) {
@@ -150,7 +162,7 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
     }
 
     auto input = cmd->GetFirstArg();
-    PrintInfo(input, cmd->GetBool("detail"));
+    PrintInfo(input, cmd->GetBool("detail"), cmd->GetBool("opacity"));
 
     return cli::ACTION_OK;
 }
@@ -191,6 +203,17 @@ void CmdInfoInit(cli::Cmd* cmd) {
         .required = 0,
         .multiple = 0,
         .default_value = { .bool_value = 0 }
+    });
+
+
+    cmd->AddFlag(cli::Flag{
+            .name = "opacity",
+            .aliases = {"O"},
+            .desc = "Print image average opacity.",
+            .type = cli::FLAG_BOOL,
+            .required = 0,
+            .multiple = 0,
+            .default_value = { .bool_value = 0 }
     });
 
     cmd->AddFlag(cli::Flag{
