@@ -2,6 +2,7 @@
 #include "dropframes_cmd.h"
 #include "animate_cmd.h"
 #include "info_cmd.h"
+#include "opacity_cmd.h"
 
 int main(int argc, char *argv[]) {
     cli::App app {
@@ -20,6 +21,11 @@ int main(int argc, char *argv[]) {
     cli::Cmd info {};
     CmdInfoInit(&info);
     app.AddCmd(&info);
+
+
+    cli::Cmd opacity {};
+    CmdOpacityInit(&opacity);
+    app.AddCmd(&opacity);
 
     return app.Run(argc, argv);
 }
