@@ -10,6 +10,7 @@
 struct WebPPicture;
 
 void PicClear(WebPPicture* pic, cg::Color color);
+void PicTint(WebPPicture* pic, cg::Color color);
 
 int PicDraw(WebPPicture* dst, const WebPPicture* src, cg::Point point);
 int PicDrawOverFit(WebPPicture* dst, WebPPicture* src);

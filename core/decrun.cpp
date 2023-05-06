@@ -25,11 +25,11 @@ int DecRun(const char* input, void* ctx, AnimDecRunCallback callback) {
     checkf(ImgIoUtilReadFile(input, &webp_data.bytes, &webp_data.size), "The input file cannot be open %s", input);
 
     if (IsWebP(&webp_data)) {
-        check(WebPDecRunWithData(&webp_data, &ctx, callback));
+        check(WebPDecRunWithData(&webp_data, ctx, callback));
     } else if (IsGIF(&webp_data)) {
-        check(GIFDecRun(input, &ctx, callback));
+        check(GIFDecRun(input, ctx, callback));
     } else {
-        if (!ImgDecRunWithData(&webp_data, &ctx, callback)) {
+        if (!ImgDecRunWithData(&webp_data, ctx, callback)) {
             auto last_dot = strrchr(input, '.');
             notreached("Failed. Please check your file type: `%s`", last_dot ? (last_dot + 1) : input);
         }

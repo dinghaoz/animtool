@@ -153,7 +153,7 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
             .detail = cmd->GetBool("detail"),
             .opacity = cmd->GetBool("opacity")
     };
-    
+
     if (!DecRun(input, &ctx, kRunCallback)) {
         return cli::ACTION_FAILED;
     }

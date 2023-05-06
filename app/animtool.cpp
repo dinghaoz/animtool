@@ -3,6 +3,7 @@
 #include "animate_cmd.h"
 #include "info_cmd.h"
 #include "opacity_cmd.h"
+#include "overlay_cmd.h"
 
 int main(int argc, char *argv[]) {
     cli::App app {
@@ -26,6 +27,10 @@ int main(int argc, char *argv[]) {
     cli::Cmd opacity {};
     CmdOpacityInit(&opacity);
     app.AddCmd(&opacity);
+
+    cli::Cmd overlay {};
+    CmdOverlayInit(&overlay);
+    app.AddCmd(&overlay);
 
     return app.Run(argc, argv);
 }

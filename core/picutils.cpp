@@ -27,6 +27,16 @@ void PicClear(WebPPicture* pic, cg::Color color) {
     }
 }
 
+void PicTint(WebPPicture* pic, cg::Color color) {
+    for (int y=0; y<pic->height; ++y) {
+        auto argb_line = pic->argb + pic->argb_stride * y;
+        for (int x=0; x<pic->width; ++x) {
+            auto a = cg::Color::FromARGB(argb_line[x]).a;
+            argb_line[x] = cg::Color(color.r, color.g, color.b, a).ToARGB();
+        }
+    }
+}
+
 int PicDraw(WebPPicture* dst, const WebPPicture* src, cg::Point point) {
     require(point.x + src->width <= dst->width);
     require(point.y + src->height <= dst->height);
@@ -97,6 +107,7 @@ int PicInitWithFile(WebPPicture* pic, const char* path) {
 
     auto reader = WebPGuessImageReader(data.bytes, data.size);
 
+    pic->use_argb = 1;
     check(reader(data.bytes, data.size, pic, 1, NULL));
 
     return 1;

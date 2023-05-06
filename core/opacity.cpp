@@ -5,14 +5,7 @@
 #include "opacity.h"
 
 #include "core/animrun.h"
-#include "core/webprun.h"
-#include "core/gifrun.h"
-#include "core/imgrun.h"
-#include "core/filefmt.h"
 #include "core/rawgif.h"
-
-#include "webp/mux_types.h" // WebPData
-#include "../imageio/imageio_util.h" // ImgIoUtilReadFile
 
 
 #ifdef WEBP_HAVE_GIF
