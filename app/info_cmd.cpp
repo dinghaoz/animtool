@@ -19,6 +19,7 @@
 #include "core/logger.h"
 #include "core/check.h"
 #include "utils/defer.h"
+#include "core/decrun.h"
 
 struct Context {
     int detail;
@@ -124,34 +125,19 @@ static int OnEnd(void* ctx, const AnimInfo* anim_info) {
     return 1;
 }
 
-static AnimDecRunCallback kDropFramesCallback {
+static AnimDecRunCallback kRunCallback {
     .on_start = OnStart,
     .on_frame = OnFrame,
     .on_end = OnEnd
 };
 
 static int PrintInfo(const char* input, int detail, int opacity) {
-    WebPData webp_data;
-    WebPDataInit(&webp_data);
-    defer(WebPDataClear(&webp_data));
-
-    check(ImgIoUtilReadFile(input, &webp_data.bytes, &webp_data.size));
 
     Context ctx{
-        .detail = detail,
-        .opacity = opacity
+            .detail = detail,
+            .opacity = opacity
     };
-
-    if (IsWebP(&webp_data)) {
-        check(WebPDecRunWithData(&webp_data, &ctx, kDropFramesCallback));
-    } else if (IsGIF(&webp_data)) {
-        check(GIFDecRun(input, &ctx, kDropFramesCallback));
-    } else {
-        if (!ImgDecRunWithData(&webp_data, &ctx, kDropFramesCallback)) {
-            auto last_dot = strrchr(input, '.');
-            notreached("Failed. Please check your file type: `%s`", last_dot ? (last_dot + 1) : input);
-        }
-    }
+    check(DecRun(input, &ctx, kRunCallback));
     return 1;
 }
 
@@ -162,7 +148,15 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
     }
 
     auto input = cmd->GetFirstArg();
-    PrintInfo(input, cmd->GetBool("detail"), cmd->GetBool("opacity"));
+
+    Context ctx{
+            .detail = cmd->GetBool("detail"),
+            .opacity = cmd->GetBool("opacity")
+    };
+    
+    if (!DecRun(input, &ctx, kRunCallback)) {
+        return cli::ACTION_FAILED;
+    }
 
     return cli::ACTION_OK;
 }

@@ -18,6 +18,7 @@
 #include "check.h"
 #include "logger.h"
 #include "utils/defer.h"
+#include "decrun.h"
 
 #include <cmath>
 #include <cstring>
@@ -547,10 +548,6 @@ int AnimToolDropFrames(
     int n_transforms,
     const FrameTransform transforms[MAX_N_TRANSFORMS]
 ) {
-    WebPData webp_data;
-    WebPDataInit(&webp_data);
-    defer(WebPDataClear(&webp_data));
-
     logger::i("Start AnimToolDropFrames");
     logger::i("    input: %s", input);
     logger::i("    output: %s", output);
@@ -606,18 +603,7 @@ int AnimToolDropFrames(
         .options = options
     };
 
-    checkf(ImgIoUtilReadFile(input, &webp_data.bytes, &webp_data.size), "The input file cannot be open %s", input);
-
-    if (IsWebP(&webp_data)) {
-        check(WebPDecRunWithData(&webp_data, &ctx, kDropFramesCallback));
-    } else if (IsGIF(&webp_data)) {
-        check(GIFDecRun(input, &ctx, kDropFramesCallback));
-    } else {
-        if (!ImgDecRunWithData(&webp_data, &ctx, kDropFramesCallback)) {
-            auto last_dot = strrchr(input, '.');
-            notreached("Failed. Please check your file type: `%s`", last_dot ? (last_dot + 1) : input);
-        }
-    }
+    check(DecRun(input, &ctx, kDropFramesCallback));
 
     logger::i("End AnimToolDropFrames: %d->%d", ctx.in_frame_count, ctx.out_frame_count);
     return 1;

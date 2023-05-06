@@ -23,6 +23,7 @@
 #include "core/logger.h"
 #include "core/check.h"
 #include "utils/defer.h"
+#include "decrun.h"
 
 struct Context {
     int sample_divider;
@@ -69,26 +70,11 @@ int AnimToolGetOpacity(
         int sample_divider,
         float* out_opacity
 ) {
-    WebPData webp_data;
-    WebPDataInit(&webp_data);
-    defer(WebPDataClear(&webp_data));
-
-    check(ImgIoUtilReadFile(image_path, &webp_data.bytes, &webp_data.size));
-
     Context ctx{
             .sample_divider = sample_divider
     };
 
-    if (IsWebP(&webp_data)) {
-        check(WebPDecRunWithData(&webp_data, &ctx, kRunCallback));
-    } else if (IsGIF(&webp_data)) {
-        check(GIFDecRun(image_path, &ctx, kRunCallback));
-    } else {
-        if (!ImgDecRunWithData(&webp_data, &ctx, kRunCallback)) {
-            auto last_dot = strrchr(image_path, '.');
-            notreached("Failed. Please check your file type: `%s`", last_dot ? (last_dot + 1) : image_path);
-        }
-    }
+    check(DecRun(image_path, &ctx, kRunCallback));
 
     if (ctx.n_samples == 0) {
         *out_opacity = 0;
