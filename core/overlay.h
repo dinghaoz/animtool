@@ -8,6 +8,7 @@
 int AnimToolOverlay(
         const char* input,
         const char* overlay_path,
+        int center,
         int x, int y,
         const char* rgba_str,
 

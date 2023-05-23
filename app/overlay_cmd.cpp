@@ -19,6 +19,7 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
     if (!AnimToolOverlay(
             cmd->GetFirstArg(),
             cmd->GetStr("overlay"),
+            cmd->GetBool("center"),
             cmd->GetInt("origin_x"),
             cmd->GetInt("origin_y"),
             cmd->GetStr("tint"),
@@ -108,9 +109,18 @@ void CmdOverlayInit(cli::Cmd* cmd) {
     });
 
     cmd->AddFlag(cli::Flag{
+            .name = "center",
+            .desc = "center the overlay",
+            .type = cli::FLAG_BOOL,
+            .required = 0,
+            .multiple = 0,
+            .default_value = { .bool_value = 0 }
+    });
+
+    cmd->AddFlag(cli::Flag{
             .name = "origin_x",
             .aliases = {"x"},
-            .desc = "Overlay origin x",
+            .desc = "Overlay origin x. Ignored if --center is set",
             .type = cli::FLAG_INT,
             .required = 0,
             .multiple = 0,
@@ -120,7 +130,7 @@ void CmdOverlayInit(cli::Cmd* cmd) {
     cmd->AddFlag(cli::Flag{
             .name = "origin_y",
             .aliases = {"y"},
-            .desc = "Overlay origin y",
+            .desc = "Overlay origin y. Ignored if --center is set",
             .type = cli::FLAG_INT,
             .required = 0,
             .multiple = 0,

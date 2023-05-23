@@ -16,6 +16,7 @@ struct Context {
     const WebPPicture* overlay;
     AnimEncoder* encoder;
     cg::Point point;
+    int center;
 
     int total_duration_so_far;
 
@@ -36,6 +37,14 @@ struct Context {
 static int OnStart(void* ctx, const AnimInfo* info, int* stop) {
     auto thiz = reinterpret_cast<Context*>(ctx);
 
+    if (thiz->center) {
+        auto x = (info->canvas_width - thiz->overlay->width)/2;
+        auto y = (info->canvas_height - thiz->overlay->height)/2;
+        thiz->point = cg::Point {
+            .x = x,
+            .y = y
+        };
+    }
 
     AnimEncoderOptions encoder_options {
             .verbose = thiz->verbose,
@@ -97,7 +106,8 @@ static AnimDecRunCallback kRunCallback {
 int AnimToolOverlay(
         const char* input,
         const char* overlay_path,
-        int x, int y,
+        int center,
+        int x, int y, // ignored if center == 1
         const char* rgba_str,
 
         const char* output,
@@ -122,6 +132,7 @@ int AnimToolOverlay(
 
     Context ctx{
         .overlay = &overlay,
+        .center = center,
         .point = cg::Point {
             .x = x,
             .y = y
