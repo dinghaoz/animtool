@@ -37,7 +37,8 @@ void PicTint(WebPPicture* pic, cg::Color color) {
     }
 }
 
-int PicDraw(WebPPicture* dst, const WebPPicture* src, cg::Point point) {
+
+int PicMerge(WebPPicture* dst, const WebPPicture* src, cg::Point point, cg::Color (*Merger)( const cg::Color&,  const cg::Color&)) {
     require(point.x + src->width <= dst->width);
     require(point.y + src->height <= dst->height);
 
@@ -51,11 +52,19 @@ int PicDraw(WebPPicture* dst, const WebPPicture* src, cg::Point point) {
             auto dst_y = y + point.y;
             auto dst_pixel = dst->argb[dst_y * dst_stride + dst_x];
 
-            dst->argb[dst_y * dst_stride + dst_x] = cg::Blend(cg::Color::FromARGB(dst_pixel), cg::Color::FromARGB(src_pixel)).ToARGB();
+            dst->argb[dst_y * dst_stride + dst_x] = Merger(cg::Color::FromARGB(dst_pixel), cg::Color::FromARGB(src_pixel)).ToARGB();
         }
     }
 
     return 1;
+}
+
+int PicDraw(WebPPicture* dst, const WebPPicture* src, cg::Point point) {
+    return PicMerge(dst, src, point, cg::Blend);
+}
+
+int PicMask(WebPPicture* dst, const WebPPicture* mask, cg::Point point) {
+    return PicMerge(dst, mask, point, cg::Mask);
 }
 
 

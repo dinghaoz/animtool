@@ -107,7 +107,7 @@ namespace cg {
         }
     };
 
-    static inline Color Blend(Color bottom, Color top) {
+    static inline Color Blend(const Color& bottom, const Color& top) {
         auto alpha_bottom = bottom.a / 255.0f;
         auto alpha_top = top.a / 255.0f;
 
@@ -121,6 +121,11 @@ namespace cg {
         auto b = (top.b*alpha_top + bottom.b*alpha_bottom*(1 - alpha_top)) / alpha;
 
         return Color(static_cast<uint8_t>(r), static_cast<uint8_t>(g), static_cast<uint8_t>(b), static_cast<uint8_t>(alpha * 255));
+    }
+
+
+    static inline Color Mask(const Color& src, const Color& mask) {
+        return Color(src.r, src.g, src.b, mask.a);
     }
 }
 

@@ -13,6 +13,7 @@ void PicClear(WebPPicture* pic, cg::Color color);
 void PicTint(WebPPicture* pic, cg::Color color);
 
 int PicDraw(WebPPicture* dst, const WebPPicture* src, cg::Point point);
+int PicMask(WebPPicture* dst, const WebPPicture* mask, cg::Point point);
 int PicDrawOverFit(WebPPicture* dst, WebPPicture* src);
 
 int PicFill(WebPPicture* pic, cg::Size dst);

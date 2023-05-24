@@ -38,7 +38,7 @@ struct AnimEncoderWebP : public AnimEncoder {
 private:
     WebPAnimEncoder* impl;
 public:
-    ~AnimEncoderWebP() {
+    ~AnimEncoderWebP() override {
         if (impl)
             WebPAnimEncoderDelete(impl);
     }
@@ -47,7 +47,7 @@ public:
         return ".webp";
     }
 
-    int Init(int canvas_width, int canvas_height, const AnimEncoderOptions* options)  {
+    int Init(int canvas_width, int canvas_height, const AnimEncoderOptions* options) override{
         require(!impl);
         WebPAnimEncoderOptions encoder_options;
         check(WebPAnimEncoderOptionsInit(&encoder_options));
@@ -221,7 +221,7 @@ struct AnimEncoderGif : public AnimEncoder {
     }
 
 public:
-    ~AnimEncoderGif() {
+    ~AnimEncoderGif() override {
         if (impl) {
             int gif_error = 0;
             if (!DGifCloseFile(impl, &gif_error)) {
@@ -234,7 +234,7 @@ public:
         return ".gif";
     }
 
-    int Init(int canvas_width, int canvas_height, const AnimEncoderOptions* options)  {
+    int Init(int canvas_width, int canvas_height, const AnimEncoderOptions* options) override  {
         require(!impl);
 
         logger::d("GIF Encode via giflib(%d.%d.%d)", GIFLIB_MAJOR, GIFLIB_MINOR, GIFLIB_RELEASE);
