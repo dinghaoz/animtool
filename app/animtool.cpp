@@ -4,6 +4,7 @@
 #include "info_cmd.h"
 #include "opacity_cmd.h"
 #include "overlay_cmd.h"
+#include "mask_cmd.h"
 
 int main(int argc, char *argv[]) {
     cli::App app {
@@ -31,6 +32,10 @@ int main(int argc, char *argv[]) {
     cli::Cmd overlay {};
     CmdOverlayInit(&overlay);
     app.AddCmd(&overlay);
+
+    cli::Cmd mask {};
+    CmdMaskInit(&mask);
+    app.AddCmd(&mask);
 
     return app.Run(argc, argv);
 }

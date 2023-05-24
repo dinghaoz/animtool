@@ -45,6 +45,23 @@ int PicMerge(WebPPicture* dst, const WebPPicture* src, cg::Point point, cg::Colo
     const size_t src_stride = src->argb_stride;
     const size_t dst_stride = dst->argb_stride;
 
+
+    for (int y=0; y<dst->height; ++y) {
+        for (int x=0; x<dst->width; ++x) {
+
+            auto dst_pixel = dst->argb[y * dst_stride + x];
+            uint32_t src_pixel = 0;
+            if (point.y <= y && y<point.y + src->height && point.x <= x && x<point.x + src->width) {
+
+                auto src_x = x - point.x;
+                auto src_y = y - point.y;
+                src_pixel = src->argb[src_y * src_stride + src_x];
+            }
+
+            dst->argb[y * dst_stride + x] = Merger(cg::Color::FromARGB(dst_pixel), cg::Color::FromARGB(src_pixel)).ToARGB();
+        }
+    }
+
     for (int y=0; y<src->height; ++y) {
         for (int x=0; x<src->width; ++x) {
             auto src_pixel = src->argb[y * src_stride + x];
