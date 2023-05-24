@@ -15,8 +15,8 @@
 struct Context {
     const WebPPicture* overlay;
     AnimEncoder* encoder;
-    cg::Point point;
     int center;
+    cg::Point point;
 
     int total_duration_so_far;
 
