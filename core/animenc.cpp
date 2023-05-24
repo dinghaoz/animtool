@@ -30,7 +30,7 @@ public:
     virtual int AddFrame(WebPPicture* pic, int start_ts, int end_ts, const AnimFrameOptions* options) = 0;
     virtual int Export(int final_ts, int loop_count, const char* output_path) = 0;
     virtual const char* GetFileExt() const = 0;
-    virtual ~AnimEncoder() {};
+    virtual ~AnimEncoder() = default;;
 };
 
 
@@ -43,7 +43,7 @@ public:
             WebPAnimEncoderDelete(impl);
     }
 
-    const char* GetFileExt() const {
+    const char* GetFileExt() const override {
         return ".webp";
     }
 
@@ -68,7 +68,7 @@ public:
         return 1;
     }
 
-    int AddFrame(WebPPicture* pic, int start_ts, int end_ts, const AnimFrameOptions* options)  {
+    int AddFrame(WebPPicture* pic, int start_ts, int end_ts, const AnimFrameOptions* options) override {
         require(impl);
 
         WebPConfig config;
@@ -118,7 +118,7 @@ public:
         return ok;
     }
 
-    int Export(int final_ts, int loop_count, const char* output_path) {
+    int Export(int final_ts, int loop_count, const char* output_path) override {
         require(impl);
 
         checkf(WebPAnimEncoderAdd(impl, nullptr, final_ts, nullptr), "%s", WebPAnimEncoderGetError(impl));
@@ -230,7 +230,7 @@ public:
         }
     }
 
-    const char* GetFileExt() const {
+    const char* GetFileExt() const override {
         return ".gif";
     }
 
@@ -266,7 +266,7 @@ public:
         color.Blue = b;
     }
 
-    int AddFrame(WebPPicture* pic, int start_ts, int end_ts, const AnimFrameOptions* options)  {
+    int AddFrame(WebPPicture* pic, int start_ts, int end_ts, const AnimFrameOptions* options) override {
         require(impl);
         require(pic->use_argb);
 
@@ -347,7 +347,7 @@ public:
     }
 
 
-    int Export(int final_ts, int loop_count, const char* output_path) {
+    int Export(int final_ts, int loop_count, const char* output_path) override {
         require(impl);
 
         int gif_error = 0;
