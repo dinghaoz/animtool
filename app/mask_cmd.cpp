@@ -71,7 +71,7 @@ void CmdMaskInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "output",
-            .aliases = {"o"},
+            .aliases = {'o'},
             .desc = "output image path",
             .type = cli::FLAG_STR,
             .required = 1,
@@ -80,7 +80,7 @@ void CmdMaskInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "format",
-            .aliases = {"f"},
+            .aliases = {'f'},
             .desc = "output image format: webp or gif",
             .type = cli::FLAG_STR,
             .required = 0,
@@ -108,7 +108,7 @@ void CmdMaskInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "origin_x",
-            .aliases = {"x"},
+            .aliases = {'x'},
             .desc = "Overlay origin x. Ignored if --center is set",
             .type = cli::FLAG_INT,
             .required = 0,
@@ -118,7 +118,7 @@ void CmdMaskInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "origin_y",
-            .aliases = {"y"},
+            .aliases = {'y'},
             .desc = "Overlay origin y. Ignored if --center is set",
             .type = cli::FLAG_INT,
             .required = 0,

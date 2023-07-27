@@ -191,7 +191,7 @@ void CmdInfoInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
         .name = "detail",
-        .aliases = {"d"},
+        .aliases = {'d'},
         .desc = "Print image detail for every frame.",
         .type = cli::FLAG_BOOL,
         .required = 0,
@@ -202,7 +202,7 @@ void CmdInfoInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "opacity",
-            .aliases = {"O"},
+            .aliases = {'O'},
             .desc = "Print image average opacity.",
             .type = cli::FLAG_BOOL,
             .required = 0,
@@ -212,7 +212,7 @@ void CmdInfoInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "verbose",
-            .aliases = {"v"},
+            .aliases = {'v'},
             .desc = "print detail log",
             .type = cli::FLAG_BOOL,
             .required = 0,

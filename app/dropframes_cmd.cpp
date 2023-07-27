@@ -243,7 +243,7 @@ void CmdDropFramesInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
         .name = "output",
-        .aliases = {"o"},
+        .aliases = {'o'},
         .desc = "output image path",
         .type = cli::FLAG_STR,
         .required = 0,
@@ -252,7 +252,7 @@ void CmdDropFramesInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
         .name = "output_dir",
-        .aliases = {"d"},
+        .aliases = {'d'},
         .desc = "output image dir path",
         .type = cli::FLAG_STR,
         .required = 0,
@@ -261,7 +261,7 @@ void CmdDropFramesInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
         .name = "frame_rate",
-        .aliases = {"R"},
+        .aliases = {'R'},
         .desc = "output image max frame rate. 0 means no limits.",
         .type = cli::FLAG_INT,
         .required = 0,
@@ -271,7 +271,7 @@ void CmdDropFramesInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
         .name = "total_duration",
-        .aliases = {"D"},
+        .aliases = {'D'},
         .desc = "output image max total duration, in milliseconds. 0 means no limits.",
         .type = cli::FLAG_INT,
         .required = 0,
@@ -281,7 +281,7 @@ void CmdDropFramesInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
         .name = "loop_count",
-        .aliases = {"L"},
+        .aliases = {'L'},
         .desc = "if >= 0, force loop count the value, otherwise respect the one in input file.",
         .type = cli::FLAG_INT,
         .required = 0,
@@ -294,7 +294,7 @@ void CmdDropFramesInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
         .name = "transform",
-        .aliases = {"T"},
+        .aliases = {'T'},
         .desc = "A transform. Can have more than one. Format: "
                 "`left:top:width:height->width:height@file_name;width:height@file_name#format`. "
                 "`->` separates the source rectangle and the destinations. "

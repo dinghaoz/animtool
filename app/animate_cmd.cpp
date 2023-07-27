@@ -58,7 +58,7 @@ void CmdAnimateInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "background",
-            .aliases = {"b"},
+            .aliases = {'b'},
             .desc = "background. format is type:content. e.g file:path/to/the/file, color:0xFF0000FF, frame:0",
             .type = cli::FLAG_STR,
             .required = 0,
@@ -68,7 +68,7 @@ void CmdAnimateInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "background_blur_radius",
-            .aliases = {"c"},
+            .aliases = {'c'},
             .desc = "background blur radius",
             .type = cli::FLAG_INT,
             .required = 0,
@@ -78,7 +78,7 @@ void CmdAnimateInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "width",
-            .aliases = {"w"},
+            .aliases = {'w'},
             .desc = "Canvas width",
             .type = cli::FLAG_INT,
             .required = 0,
@@ -88,7 +88,7 @@ void CmdAnimateInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "height",
-            .aliases = {"h"},
+            .aliases = {'h'},
             .desc = "Canvas height",
             .type = cli::FLAG_INT,
             .required = 0,
@@ -98,7 +98,7 @@ void CmdAnimateInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "output",
-            .aliases = {"o"},
+            .aliases = {'o'},
             .desc = "output image path",
             .type = cli::FLAG_STR,
             .required = 0,
@@ -107,7 +107,7 @@ void CmdAnimateInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "format",
-            .aliases = {"f"},
+            .aliases = {'f'},
             .desc = "output image format: webp or gif",
             .type = cli::FLAG_STR,
             .required = 0,
@@ -117,7 +117,7 @@ void CmdAnimateInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "duration",
-            .aliases = {"d"},
+            .aliases = {'d'},
             .desc = "duration for each frame",
             .type = cli::FLAG_INT,
             .required = 0,
@@ -127,7 +127,7 @@ void CmdAnimateInit(cli::Cmd* cmd) {
 
 //    cmd->AddFlag(cli::Flag{
 //            .name = "loop_count",
-//            .aliases = {"L"},
+//            .aliases = {'L'},
 //            .desc = "if >= 0, force loop count the value, otherwise respect the one in input file.",
 //            .type = cli::FLAG_INT,
 //            .required = 0,

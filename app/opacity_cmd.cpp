@@ -56,7 +56,7 @@ void CmdOpacityInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "sample_divider",
-            .aliases = {"O"},
+            .aliases = {'O'},
             .desc = "sample divider.",
             .type = cli::FLAG_INT,
             .required = 0,
