@@ -153,7 +153,7 @@ int AnimToolAnimate(
         check(PicInitWithFile(&pic, image_paths[i]));
 
         check(WebPPictureCopy(&bg, &canvas));
-        check(PicDrawOverFit(&canvas, &pic));
+        check(PicDrawOverFit(&canvas, &pic, 1));
 
         auto end_ts = total_duration_so_far + duration;
         check(AnimEncoderAddFrame(encoder, &canvas, total_duration_so_far, end_ts, &frame_options));

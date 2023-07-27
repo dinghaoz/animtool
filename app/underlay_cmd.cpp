@@ -20,7 +20,7 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
     if (!AnimToolAddLayer(
             cmd->GetFirstArg(),
             cmd->GetStr("layer"),
-            1,
+            0,
             cmd->GetBool("center"),
             cmd->GetInt("origin_x"),
             cmd->GetInt("origin_y"),
@@ -43,10 +43,10 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
     return cli::ACTION_OK;
 }
 
-void CmdOverlayInit(cli::Cmd* cmd) {
+void CmdUnderlayInit(cli::Cmd* cmd) {
     *cmd = cli::Cmd {
-            .name = "overlay",
-            .desc = "Draw an overlay to the input image file.",
+            .name = "underlay",
+            .desc = "Draw an underlay to the input image file.",
             .usage = "[command options] IMAGE_FILE_PATH",
             .examples = {
                     "animtool overlay /path/to/input/file"
@@ -104,7 +104,7 @@ void CmdOverlayInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "layer",
-            .desc = "overlay image path",
+            .desc = "underlay image path",
             .type = cli::FLAG_STR,
             .required = 1,
             .multiple = 0

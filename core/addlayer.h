@@ -2,12 +2,13 @@
 // Created by Dinghao Zeng on 2023/5/6.
 //
 
-#ifndef ANIMTOOL_OVERLAY_H
-#define ANIMTOOL_OVERLAY_H
+#ifndef ANIMTOOL_ADDLAYER_H
+#define ANIMTOOL_ADDLAYER_H
 
-int AnimToolOverlay(
+int AnimToolAddLayer(
         const char* input,
-        const char* overlay_path,
+        const char* layer_path,
+        int overlay, // or else underlay
         int center,
         int x, int y,
         const char* rgba_str,
@@ -25,4 +26,4 @@ int AnimToolOverlay(
         int pass
 );
 
-#endif //ANIMTOOL_OVERLAY_H
+#endif //ANIMTOOL_ADDLAYER_H

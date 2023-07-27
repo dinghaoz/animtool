@@ -138,13 +138,13 @@ add_library(animtoolcore STATIC
         core/animrun.cpp
         core/gifrun.cpp
         core/imgrun.cpp
-        core/quantizer.cpp core/blur.cpp core/blur.h core/cg.h core/picutils.cpp core/picutils.h core/opacity.cpp core/opacity.h core/decrun.cpp core/decrun.h core/overlay.cpp core/overlay.h core/clrparse.h core/mask.cpp core/mask.h)
+        core/quantizer.cpp core/blur.cpp core/blur.h core/cg.h core/picutils.cpp core/picutils.h core/opacity.cpp core/opacity.h core/decrun.cpp core/decrun.h core/addlayer.cpp core/addlayer.h core/clrparse.h core/mask.cpp core/mask.h)
 
 target_include_directories(animtoolcore PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 target_link_libraries(animtoolcore webp_imageio webp libwebpmux webpdemux)
 
 if(BUILD_ANIMTOOL_EXECUTABLE)
-  add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp app/animate_cmd.cpp app/opacity_cmd.cpp app/opacity_cmd.h app/overlay_cmd.cpp app/overlay_cmd.h app/mask_cmd.cpp app/mask_cmd.h app/output_flags.cpp app/output_flags.h)
+  add_executable(animtool app/animtool.cpp app/dropframes_cmd.cpp app/info_cmd.cpp app/animate_cmd.cpp app/opacity_cmd.cpp app/opacity_cmd.h app/overlay_cmd.cpp app/overlay_cmd.h app/underlay_cmd.cpp app/underlay_cmd.h app/mask_cmd.cpp app/mask_cmd.h app/output_flags.cpp app/output_flags.h)
   target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 
   target_link_libraries(animtool animtoolcore)

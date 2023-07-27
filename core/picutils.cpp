@@ -39,8 +39,8 @@ void PicTint(WebPPicture* pic, cg::Color color) {
 
 
 int PicMerge(WebPPicture* dst, const WebPPicture* src, cg::Point point, cg::Color (*Merger)( const cg::Color&,  const cg::Color&)) {
-    require(point.x + src->width <= dst->width);
-    require(point.y + src->height <= dst->height);
+    checkf(point.x + src->width <= dst->width, "Invalid geometry point.x=%d, src->width=%d, dst->width=%d", point.x, src->width, dst->width);
+    checkf(point.y + src->height <= dst->height, "Invalid geometry point.y=%d, src->height=%d, dst->height=%d", point.y, src->height, dst->height);
 
     const size_t src_stride = src->argb_stride;
     const size_t dst_stride = dst->argb_stride;
@@ -76,8 +76,11 @@ int PicMerge(WebPPicture* dst, const WebPPicture* src, cg::Point point, cg::Colo
     return 1;
 }
 
-int PicDraw(WebPPicture* dst, const WebPPicture* src, cg::Point point) {
-    return PicMerge(dst, src, point, cg::Blend);
+int PicDraw(WebPPicture* dst, const WebPPicture* src, cg::Point point, int over) {
+    if (over)
+        return PicMerge(dst, src, point, cg::Blend);
+    else
+        return PicMerge(dst, src, point, cg::RevBlend);
 }
 
 int PicMask(WebPPicture* dst, const WebPPicture* mask, cg::Point point) {
@@ -85,7 +88,7 @@ int PicMask(WebPPicture* dst, const WebPPicture* mask, cg::Point point) {
 }
 
 
-int PicDrawOverFit(WebPPicture* dst, WebPPicture* src) {
+int PicDrawOverFit(WebPPicture* dst, WebPPicture* src, int over) {
 
     auto fit_rect = cg::FitTo(
             cg::Size {.width = dst->width, .height = dst->height},
@@ -94,7 +97,7 @@ int PicDrawOverFit(WebPPicture* dst, WebPPicture* src) {
 
     logger::d("fit_rect %d:%d:%d:%d", fit_rect.origin.x, fit_rect.origin.y, fit_rect.size.width, fit_rect.size.height);
     check(WebPPictureRescale(src, fit_rect.size.width, fit_rect.size.height));
-    check(PicDraw(dst, src, fit_rect.origin));
+    check(PicDraw(dst, src, fit_rect.origin, over));
 
     return 1;
 }

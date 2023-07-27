@@ -121,6 +121,8 @@ int AnimToolMask(
 ) {
 
     WebPPicture mask;
+    check(WebPPictureInit(&mask));
+    defer(WebPPictureFree(&mask));
     check(PicInitWithFile(&mask, mask_path));
 
 

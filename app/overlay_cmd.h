@@ -12,5 +12,4 @@ namespace cli {
 
 void CmdOverlayInit(cli::Cmd* cmd);
 
-
 #endif //ANIMTOOL_OVERLAY_CMD_H

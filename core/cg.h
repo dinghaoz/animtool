@@ -124,6 +124,11 @@ namespace cg {
     }
 
 
+    static inline Color RevBlend(const Color& bottom, const Color& top) {
+        return Blend(top, bottom);
+    }
+
+
     static inline Color Mask(const Color& src, const Color& mask) {
         return Color(src.r, src.g, src.b, mask.a);
     }

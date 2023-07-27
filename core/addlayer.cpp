@@ -2,7 +2,7 @@
 // Created by Dinghao Zeng on 2023/5/6.
 //
 
-#include "overlay.h"
+#include "addlayer.h"
 
 #include "picutils.h"
 #include "clrparse.h"
@@ -13,8 +13,9 @@
 
 
 struct Context {
-    const WebPPicture* overlay;
+    const WebPPicture* layer;
     AnimEncoder* encoder;
+    int overlay; // or else underlay
     int center;
     cg::Point point;
 
@@ -38,8 +39,8 @@ static int OnStart(void* ctx, const AnimInfo* info, int* stop) {
     auto thiz = reinterpret_cast<Context*>(ctx);
 
     if (thiz->center) {
-        auto x = (info->canvas_width - thiz->overlay->width)/2;
-        auto y = (info->canvas_height - thiz->overlay->height)/2;
+        auto x = (info->canvas_width - thiz->layer->width) / 2;
+        auto y = (info->canvas_height - thiz->layer->height) / 2;
         thiz->point = cg::Point {
             .x = x,
             .y = y
@@ -68,7 +69,7 @@ static int OnFrame(void* ctx, const AnimFrame* frame, int start_ts, int end_ts, 
 
     check(AnimFrameExportToPic(frame, &decoded_frame));
 
-    check(PicDraw(&decoded_frame, thiz->overlay, thiz->point));
+    check(PicDraw(&decoded_frame, thiz->layer, thiz->point, thiz->overlay));
 
     AnimFrameOptions frame_options {
             .lossless = thiz->lossless,
@@ -103,9 +104,10 @@ static AnimDecRunCallback kRunCallback {
 
 
 
-int AnimToolOverlay(
+int AnimToolAddLayer(
         const char* input,
-        const char* overlay_path,
+        const char* layer_path,
+        int overlay, // or else underlay
         int center,
         int x, int y, // ignored if center == 1
         const char* rgba_str,
@@ -122,16 +124,19 @@ int AnimToolOverlay(
         int method,
         int pass
         ) {
-    WebPPicture overlay;
-    check(PicInitWithFile(&overlay, overlay_path));
+    WebPPicture layer;
+    check(WebPPictureInit(&layer));
+    defer(WebPPictureFree(&layer));
+    check(PicInitWithFile(&layer, layer_path));
     auto tint_color = cg::Color::FromRGBA(RGBAFrom(rgba_str));
     if (tint_color.a > 0) {
-        PicTint(&overlay, tint_color);
+        PicTint(&layer, tint_color);
     }
 
 
     Context ctx{
-        .overlay = &overlay,
+        .layer = &layer,
+        .overlay = overlay,
         .center = center,
         .point = cg::Point {
             .x = x,
