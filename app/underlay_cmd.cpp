@@ -104,6 +104,7 @@ void CmdUnderlayInit(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "layer",
+            .aliases = {"underlay"},
             .desc = "underlay image path",
             .type = cli::FLAG_STR,
             .required = 1,

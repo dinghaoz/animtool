@@ -147,6 +147,7 @@ namespace cli {
 
     struct Flag {
         const char* name;
+        const char* aliases[MAX_N_FLAG_ALIASES];
         char short_aliases[MAX_N_FLAG_ALIASES];
         const char* desc;
         FlagType type;
@@ -160,7 +161,15 @@ namespace cli {
 
         int Matches(const char* arg) const {
             if (strlen(arg) > 2 && arg[0] == '-' && arg[1] == '-') {
-                return !strcmp(name, arg+2);
+                if (!strcmp(name, arg+2)) {
+                    return 1;
+                } else {
+                    for (int i=0; i<MAX_N_FLAG_ALIASES; ++i) {
+                        if (aliases[i] && !strcmp(aliases[i], arg+2))
+                            return 1;
+                    }
+                    return 0;
+                }
             } else if (arg[0] == '-') {
                 for (int i=0; i<MAX_N_FLAG_ALIASES; ++i) {
                     if (short_aliases[i] == *(arg + 1))
