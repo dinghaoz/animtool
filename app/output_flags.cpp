@@ -18,7 +18,7 @@ void CmdAddOutputFlags(cli::Cmd* cmd) {
 
     cmd->AddFlag(cli::Flag{
             .name = "verbose",
-            .aliases = {'v'},
+            .short_aliases = {'v'},
             .desc = "print detail log",
             .type = cli::FLAG_BOOL,
             .required = 0,

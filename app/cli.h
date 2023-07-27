@@ -147,7 +147,7 @@ namespace cli {
 
     struct Flag {
         const char* name;
-        char aliases[MAX_N_FLAG_ALIASES];
+        char short_aliases[MAX_N_FLAG_ALIASES];
         const char* desc;
         FlagType type;
         int required;
@@ -163,7 +163,7 @@ namespace cli {
                 return !strcmp(name, arg+2);
             } else if (arg[0] == '-') {
                 for (int i=0; i<MAX_N_FLAG_ALIASES; ++i) {
-                    if (aliases[i] == *(arg+1))
+                    if (short_aliases[i] == *(arg + 1))
                         return 1;
                 }
                 return 0;
@@ -387,7 +387,7 @@ namespace cli {
                 auto& flag = flags[i];
                 sb.AddText("    --%s", flag.name);
                 for (int j=0; j<MAX_N_FLAG_ALIASES; ++j) {
-                    auto& alias = flag.aliases[j];
+                    auto& alias = flag.short_aliases[j];
                     if (alias) {
                         sb.AddText(", -%s", alias);
                     }
