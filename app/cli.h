@@ -396,9 +396,15 @@ namespace cli {
                 auto& flag = flags[i];
                 sb.AddText("    --%s", flag.name);
                 for (int j=0; j<MAX_N_FLAG_ALIASES; ++j) {
-                    auto& alias = flag.short_aliases[j];
-                    if (alias) {
-                        sb.AddText(", -%s", alias);
+                    auto& aliases = flag.aliases[j];
+                    if (aliases) {
+                        sb.AddText(", --%s", aliases);
+                    }
+                }
+                for (int j=0; j<MAX_N_FLAG_ALIASES; ++j) {
+                    auto& short_aliases = flag.short_aliases[j];
+                    if (short_aliases) {
+                        sb.AddText(", -%c", short_aliases);
                     }
                 }
 
