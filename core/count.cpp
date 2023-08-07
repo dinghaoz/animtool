@@ -129,10 +129,11 @@ int ParsePredicate(const char* pstart, const char* pend, NamedPredicate* value) 
 
     auto name_end = name_start;
     while (name_end < pend) {
-        if ('a' <= *name_end && *name_end <= 'z')
-            continue;
-
-        ++name_end;
+        if ('a' <= *name_end && *name_end <= 'z') {
+            ++name_end;
+        } else {
+            break;
+        }
     }
 
     value->name_start = name_start;
@@ -141,13 +142,17 @@ int ParsePredicate(const char* pstart, const char* pend, NamedPredicate* value) 
     auto ple = StrSearch(pstart, name_start, "<=");
     if (ple < name_start) {
         if (ple > pstart) {
-            check(ParseInt(pstart, ple, &value->predicate.larger_equal));
+            if (ParseInt(pstart, ple, &value->predicate.larger_equal)) {
+                return -1;
+            }
         }
     }
     auto pl = StrSearch(pstart, name_start, "<");
     if (pl < name_start) {
         if (pl > pstart) {
-            check(ParseInt(pstart, pl, &value->predicate.larger));
+            if (ParseInt(pstart, pl, &value->predicate.larger)) {
+                return -1;
+            }
         }
     }
 
@@ -156,14 +161,18 @@ int ParsePredicate(const char* pstart, const char* pend, NamedPredicate* value) 
     if (pse < pend) {
         pse += strlen("<=");
         if (pse > name_end) {
-            check(ParseInt(name_end, pse, &value->predicate.smaller_equal));
+            if (ParseInt(pse, pend, &value->predicate.smaller_equal)) {
+                return -1;
+            }
         }
     }
     auto ps = StrSearch(name_end, pend, "<");
     if (ps < pend) {
         ps += strlen("<");
         if (ps > name_end) {
-            check(ParseInt(name_end, ps, &value->predicate.smaller));
+            if (ParseInt(ps, pend, &value->predicate.smaller)) {
+                return -1;
+            }
         }
     }
 
@@ -171,12 +180,14 @@ int ParsePredicate(const char* pstart, const char* pend, NamedPredicate* value) 
     if (pe < pend) {
         pe += strlen("=");
         if (pe > name_end) {
-            check(ParseInt(name_end, pe, &value->predicate.equal));
+            if (ParseInt(pe, pend, &value->predicate.equal)) {
+                return -1;
+            }
         }
     }
 
 
-    return 1;
+    return 0;
 }
 
 
@@ -189,23 +200,25 @@ int ParsePredicates(const char* predicates,
     NamedPredicate named_predicates[4];
 
     int count = 0;
-    check(ParseList(predicates, predicates + strlen(predicates), ":", named_predicates, sizeof(named_predicates)/sizeof(NamedPredicate), &count,
-                    ParsePredicate));
+    if (ParseList(predicates, predicates + strlen(predicates), ":", named_predicates, sizeof(named_predicates)/sizeof(NamedPredicate), &count,
+                    ParsePredicate)) {
+        return -1;
+    }
 
     for (int i=0; i<count; ++i) {
         const auto& p = named_predicates[i];
-        if (strncmp("alpha", p.name_start, strlen("alpha")) == 0) {
+        if (strncmp("alpha", p.name_start, p.name_end - p.name_start) == 0) {
             *o_alpha = p.predicate;
-        } else if (strncmp("red", p.name_start, strlen("red")) == 0) {
+        } else if (strncmp("red", p.name_start, p.name_end - p.name_start) == 0) {
             *o_red = p.predicate;
-        } else if (strncmp("green", p.name_start, strlen("green")) == 0) {
+        } else if (strncmp("green", p.name_start, p.name_end - p.name_start) == 0) {
             *o_green = p.predicate;
-        } else if (strncmp("blue", p.name_start, strlen("blue")) == 0) {
+        } else if (strncmp("blue", p.name_start, p.name_end - p.name_start) == 0) {
             *o_blue = p.predicate;
         }
     }
 
-    return 1;
+    return 0;
 }
 
 int AnimToolCountStr(
@@ -220,7 +233,9 @@ int AnimToolCountStr(
     CountPredicate blue = CountPredicateDefault;
     CountPredicate alpha = CountPredicateDefault;
 
-    check(ParsePredicates(predicates, &red, &green, &blue, &alpha));
+    if (ParsePredicates(predicates, &red, &green, &blue, &alpha)) {
+        return 0;
+    }
 
     return AnimToolCount(image_path, index_of_frame, x, y, width, height, red, green, blue, alpha, count);
 }

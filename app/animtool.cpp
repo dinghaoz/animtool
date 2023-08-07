@@ -6,6 +6,7 @@
 #include "overlay_cmd.h"
 #include "underlay_cmd.h"
 #include "mask_cmd.h"
+#include "count_cmd.h"
 
 int main(int argc, char *argv[]) {
     cli::App app {
@@ -41,6 +42,10 @@ int main(int argc, char *argv[]) {
     cli::Cmd mask {};
     CmdMaskInit(&mask);
     app.AddCmd(&mask);
+
+    cli::Cmd count {};
+    CmdCountInit(&count);
+    app.AddCmd(&count);
 
     return app.Run(argc, argv);
 }
