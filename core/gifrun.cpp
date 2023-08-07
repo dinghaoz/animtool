@@ -14,8 +14,6 @@
 
 #include "utils/defer.h"
 
-
-#ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"
 
 #define GIF_TRANSPARENT_MASK  0x01
@@ -322,12 +320,4 @@ int GIFDecRun(const char* file_path, void* ctx, AnimDecRunCallback callback) {
     return 1;
 }
 
-#else
-
-int GIFDecRun(const char* file_path, void* ctx, AnimDecRunCallback callback) {
-    notreached("GIF support not compiled. Please install the libgif-dev package before building.");
-    return 0;
-}
-
-#endif // #ifdef WEBP_HAVE_GIF
 

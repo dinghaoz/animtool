@@ -8,10 +8,8 @@
 #include "core/rawgif.h"
 
 
-#ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"
 #include "core/gifcompat.h"
-#endif
 
 #include "core/logger.h"
 #include "core/check.h"

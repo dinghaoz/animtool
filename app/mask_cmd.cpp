@@ -2,7 +2,7 @@
 // Created by Dinghao Zeng on 2023/5/24.
 //
 
-#include "overlay_cmd.h"
+#include "mask_cmd.h"
 
 #include "cli.h"
 #include "output_flags.h"
@@ -51,19 +51,10 @@ void CmdMaskInit(cli::Cmd* cmd) {
             },
             .n_args = 1,
             .args_desc = "Path of the image file. Supported file formats: WebP"
-                         #ifdef WEBP_HAVE_GIF
                          ", GIF"
-                         #endif
-                         #ifdef WEBP_HAVE_JPEG
                          ", JPEG"
-                         #endif
-                         #ifdef WEBP_HAVE_PNG
                          ", PNG"
-                         #endif
                          ", PNM (PGM, PPM, PAM)"
-                         #ifdef WEBP_HAVE_TIFF
-                         ", TIFF"
-                         #endif
                          ". A static image is treated as one frame animated image.",
             .context = nullptr,
             .action = CmdAction

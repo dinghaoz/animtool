@@ -7,7 +7,6 @@
 
 #include "logger.h"
 
-#ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"
 #include "../examples/gifdec.h"
 
@@ -48,7 +47,5 @@ do { \
             return 0;        \
         }                \
     } while(0)
-
-#endif
 
 #endif //MERCURY_CHECK_GIF_H

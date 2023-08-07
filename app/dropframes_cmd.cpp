@@ -223,20 +223,11 @@ void CmdDropFramesInit(cli::Cmd* cmd) {
         },
         .n_args = 1,
         .args_desc = "Path of the image file to be processed. Supported file formats: WebP"
-#ifdef WEBP_HAVE_GIF
-        ", GIF"
-#endif
-#ifdef WEBP_HAVE_JPEG
-         ", JPEG"
-#endif
-#ifdef WEBP_HAVE_PNG
-         ", PNG"
-#endif 
-         ", PNM (PGM, PPM, PAM)"
-#ifdef WEBP_HAVE_TIFF
-         ", TIFF"
-#endif
-        ". A static image is treated as one frame animated image.",
+                     ", GIF"
+                     ", JPEG"
+                     ", PNG"
+                     ", PNM (PGM, PPM, PAM)"
+                     ". A static image is treated as one frame animated image.",
         .context = nullptr,
         .action = CmdAction
     };

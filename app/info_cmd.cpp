@@ -11,10 +11,8 @@
 #include "../imageio/imageio_util.h" // ImgIoUtilReadFile
 
 
-#ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"
 #include "core/gifcompat.h"
-#endif
 
 #include "core/logger.h"
 #include "core/check.h"
@@ -42,7 +40,6 @@ static int OnStart(void* ctx, const AnimInfo* info, int* stop) {
         imginfo("Loop count %d", info->loop_count);
     }
 
-#ifdef WEBP_HAVE_GIF
     if (info->raw_gif) {
         imginfo("[GIF]");
         imginfo("    res %d", info->raw_gif->color_res);
@@ -51,12 +48,10 @@ static int OnStart(void* ctx, const AnimInfo* info, int* stop) {
             imginfo("    cmap(%d)", info->raw_gif->color_map->ColorCount);
         }
     }
-#endif
 
     return 1;
 }
 
-#ifdef WEBP_HAVE_GIF
 static const char* GetDisposalMethodName(int dispose_method) {
     switch (dispose_method) {
         case DISPOSAL_UNSPECIFIED: return "?(0)";
@@ -66,7 +61,6 @@ static const char* GetDisposalMethodName(int dispose_method) {
         default: return nullptr;
     }
 }
-#endif
 
 
 static int OnFrame(void* ctx, const AnimFrame* frame, int start_ts, int end_ts, int* stop) {
@@ -82,7 +76,6 @@ static int OnFrame(void* ctx, const AnimFrame* frame, int start_ts, int end_ts, 
         sb.AddText(" opacity=%.2f", opacity);
         thiz->acc_opacity += opacity;
     }
-#ifdef WEBP_HAVE_GIF
     if (frame->raw_gif) {
         sb.AddText(" [GIF]");
         if (frame->raw_gif->interlace) {
@@ -100,7 +93,6 @@ static int OnFrame(void* ctx, const AnimFrame* frame, int start_ts, int end_ts, 
         sb.AddText(" [%d:%d:%d:%d]", frame->raw_gif->left, frame->raw_gif->top, frame->raw_gif->width, frame->raw_gif->height);
         sb.AddText(" disp=%s", GetDisposalMethodName(frame->raw_gif->dispose_method));
     }
-#endif
 
     imginfo("image#%d duration=%d%s", thiz->frame_count, end_ts - start_ts, sb.buf);
 
@@ -171,20 +163,11 @@ void CmdInfoInit(cli::Cmd* cmd) {
         },
         .n_args = 1,
         .args_desc = "Path of the image file. Supported file formats: WebP"
-#ifdef WEBP_HAVE_GIF
-        ", GIF"
-#endif
-#ifdef WEBP_HAVE_JPEG
-         ", JPEG"
-#endif
-#ifdef WEBP_HAVE_PNG
-         ", PNG"
-#endif 
-         ", PNM (PGM, PPM, PAM)"
-#ifdef WEBP_HAVE_TIFF
-         ", TIFF"
-#endif
-        ". A static image is treated as one frame animated image.",
+                     ", GIF"
+                     ", JPEG"
+                     ", PNG"
+                     ", PNM (PGM, PPM, PAM)"
+                     ". A static image is treated as one frame animated image.",
         .context = nullptr,
         .action = CmdAction
     };

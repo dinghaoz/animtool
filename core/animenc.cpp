@@ -11,16 +11,13 @@
 
 #include "check_gif.h"
 
-#ifdef WEBP_HAVE_GIF
 #include "gif_lib.h"
-#endif
 
 #include "check.h"
 #include "logger.h"
 #include "utils/defer.h"
 
 #include <cstdlib>
-#include <cstring>
 #include <cmath>
 #include <unordered_map>
 
@@ -139,10 +136,6 @@ public:
         return 1;
     }
 };
-
-
-
-#ifdef WEBP_HAVE_GIF
 
 class ByteArray {
 private:
@@ -369,7 +362,6 @@ private:
     ByteArray buffer;
     int duration_ten_ms;
 };
-#endif
 
 AnimEncoder* AnimEncoderNew(const char* format, int canvas_width, int canvas_height, const AnimEncoderOptions* options) {
     require(format);
@@ -380,12 +372,8 @@ AnimEncoder* AnimEncoderNew(const char* format, int canvas_width, int canvas_hei
         encoder = new AnimEncoderWebP();
         check(encoder);
     } else if (!strcasecmp(format, "gif")) {
-#ifdef WEBP_HAVE_GIF
         encoder = new AnimEncoderGif();
         check(encoder);
-#else
-        notreached("GIF support not compiled. Please install the libgif-dev package before building");
-#endif
     } else {
         notreached("Unknown AnimEncoder format `%s`", format);
     }
