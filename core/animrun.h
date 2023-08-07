@@ -50,6 +50,12 @@ void AnimFrameInitWithPic(AnimFrame* frame, WebPPicture *pic);
 int AnimFrameExportToPic(const AnimFrame* frame, WebPPicture *pic);
 int AnimFrameGetOpacity(const AnimFrame* frame, float *out_opacity);
 
+int AnimFrameEnumerate(
+        const AnimFrame* frame,
+        int x_start, int y_start, int width, int height,
+        void* context,
+        void(*visitor)(void* context, int, int, uint8_t, uint8_t, uint8_t, uint8_t, int*));
+
 #ifdef __cplusplus
 }
 #endif

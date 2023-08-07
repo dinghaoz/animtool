@@ -6,15 +6,13 @@
 
 #include "core/animrun.h"
 #include "core/rawgif.h"
+#include "decrun.h"
 
 
 #include "gif_lib.h"
-#include "core/gifcompat.h"
 
 #include "core/logger.h"
 #include "core/check.h"
-#include "utils/defer.h"
-#include "decrun.h"
 
 struct Context {
     int sample_divider;
