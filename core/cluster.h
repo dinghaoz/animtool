@@ -16,7 +16,8 @@ int AnimToolCluster(
         int index_of_frame,
         int x, int y, int width, int height,
         int k,
-        uint32_t* argbs
+        uint32_t* argbs,
+        uint32_t* counts
 );
 
 

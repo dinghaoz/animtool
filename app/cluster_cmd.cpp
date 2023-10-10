@@ -16,6 +16,8 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
     auto k = cmd->GetInt("number_of_clusters");
     auto argbs = new uint32_t[k];
     defer(delete[] argbs);
+    auto counts = new uint32_t[k];
+    defer(delete[] counts);
 
     if (!AnimToolCluster(
             input,
@@ -25,14 +27,15 @@ static cli::ActionError CmdAction(void* context, const cli::CmdResult* cmd, cli:
             cmd->GetInt("width"),
             cmd->GetInt("height"),
             k,
-            argbs)) {
+            argbs,
+            counts)) {
         return cli::ACTION_FAILED;
     }
 
     for (int i=0; i<k; ++i) {
         auto argb = argbs[i];
         auto clr = cg::Color::FromARGB(argb);
-        fprintf(stdout, "#%02X%02X%02X%02X\n", clr.r, clr.g, clr.b, clr.a);
+        fprintf(stdout, "#%02X%02X%02X%02X, %d\n", clr.r, clr.g, clr.b, clr.a, counts[i]);
     }
 
     return cli::ACTION_OK;

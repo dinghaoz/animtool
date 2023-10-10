@@ -23,6 +23,7 @@ struct Context {
 
     std::vector<std::array<float , 4>>* points;
     uint32_t* argbs;
+    uint32_t* counts;
 };
 
 
@@ -58,12 +59,19 @@ static int OnEnd(void* ctx, const AnimInfo* anim_info) {
     auto thiz = reinterpret_cast<Context*>(ctx);
     auto cluster_data = dkm::kmeans_lloyd(*thiz->points, thiz->k);
 
-    auto p = thiz->argbs;
+    auto pargbs = thiz->argbs;
+    auto pcounts = thiz->counts;
     for (const auto& mean : std::get<0>(cluster_data)) {
-        *p = cg::Color(mean[0] * 255, mean[1]*255, mean[2]*255, mean[3]*255).ToARGB();
-        ++p;
+        *pargbs = cg::Color(mean[0] * 255, mean[1]*255, mean[2]*255, mean[3]*255).ToARGB();
+        *pcounts = 0;
+        ++pargbs;
+        ++pcounts;
     }
 
+
+    for (const auto& i : std::get<1>(cluster_data)) {
+        ++thiz->counts[i];
+    }
 
     return 1;
 }
@@ -82,7 +90,8 @@ int AnimToolCluster(
         int index_of_frame,
         int x, int y, int width, int height,
         int k,
-        uint32_t* argbs
+        uint32_t* argbs,
+        uint32_t* counts
 ) {
 
     Context ctx{
@@ -93,7 +102,8 @@ int AnimToolCluster(
             .height = height,
             .k = k,
             .points = new std::vector<std::array<float , 4>>(),
-            .argbs = argbs
+            .argbs = argbs,
+            .counts = counts
     };
 
     defer(delete ctx.points);
