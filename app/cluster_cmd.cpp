@@ -110,7 +110,7 @@ void CmdClusterInit(cli::Cmd* cmd) {
     cmd->AddFlag(cli::Flag{
             .name = "number_of_clusters",
             .short_aliases = {'k'},
-            .desc = "A predicate to specify when a pixel is counted.",
+            .desc = "k of k-means.",
             .type = cli::FLAG_INT,
             .required = 1,
             .multiple = 0,
