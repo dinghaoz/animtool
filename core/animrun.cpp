@@ -103,7 +103,7 @@ int AnimFrameEnumerate(
                 for (int x=x_start; x<frame->pic->width && (width<0 || x<x_start + width); ++x) {
                     auto pixel = argb_line[x];
                     int stop = 0;
-                    visitor(context, x, y,  pixel >> 0,  pixel >> 8,  pixel >> 16,  pixel >> 24, &stop);
+                    visitor(context, x, y,  (pixel >> 16) & 0xFF,  (pixel >> 8) & 0xFF,  (pixel >> 0) & 0xFF,  (pixel >> 24) & 0xFF, &stop);
                     if (stop)
                         return 1;
                 }
