@@ -138,7 +138,7 @@ add_library(animtoolcore STATIC
         core/animrun.cpp
         core/gifrun.cpp
         core/imgrun.cpp
-        core/quantizer.cpp core/blur.cpp core/blur.h core/cg.h core/picutils.cpp core/picutils.h core/opacity.cpp core/opacity.h core/decrun.cpp core/decrun.h core/addlayer.cpp core/addlayer.h core/clrparse.h core/mask.cpp core/mask.h
+        core/quantizer.cpp core/blurutils.cpp core/blurutils.h core/cg.h core/picutils.cpp core/picutils.h core/opacity.cpp core/opacity.h core/decrun.cpp core/decrun.h core/addlayer.cpp core/addlayer.h core/clrparse.h core/mask.cpp core/mask.h
         core/count.cpp
         core/count.h
         utils/parse.h

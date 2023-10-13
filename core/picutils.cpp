@@ -4,7 +4,7 @@
 
 #include "picutils.h"
 
-#include "blur.h"
+#include "blurutils.h"
 
 #include "../imageio/imageio_util.h"
 #include "../imageio/image_dec.h"

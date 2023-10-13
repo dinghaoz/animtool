@@ -2,7 +2,7 @@
 // Created by Dinghao Zeng on 2023/3/3.
 //
 
-#include "blur.h"
+#include "blurutils.h"
 #include <stdlib.h>
 #include <algorithm>
 #include <cstring>
