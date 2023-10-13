@@ -144,6 +144,8 @@ add_library(animtoolcore STATIC
         utils/parse.h
         core/cluster.cpp
         core/cluster.h
+        core/blur.cpp
+        core/blur.h
 )
 
 target_include_directories(animtoolcore PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
@@ -155,7 +157,9 @@ if(BUILD_ANIMTOOL_EXECUTABLE)
           app/count_cmd.h
           app/count_cmd.h
           app/cluster_cmd.cpp
-          app/cluster_cmd.h)
+          app/cluster_cmd.h
+          app/blur_cmd.cpp
+          app/blur_cmd.h)
   target_include_directories(animtool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${webp_SOURCE_DIR}/src ${gif_SOURCE_DIR})
 
   target_link_libraries(animtool animtoolcore)

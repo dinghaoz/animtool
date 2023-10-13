@@ -237,7 +237,7 @@ namespace cli {
             return result.values[0].int_value;
         }
 
-        int GetFloat(const char* name) const {
+        float GetFloat(const char* name) const {
             FlagResult result{};
             if (GetResultWithValue(name, FLAG_FLOAT, &result)) {
                 return 0;

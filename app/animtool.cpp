@@ -8,6 +8,7 @@
 #include "mask_cmd.h"
 #include "count_cmd.h"
 #include "cluster_cmd.h"
+#include "blur_cmd.h"
 
 int main(int argc, char *argv[]) {
     cli::App app {
@@ -51,6 +52,10 @@ int main(int argc, char *argv[]) {
     cli::Cmd cluster {};
     CmdClusterInit(&cluster);
     app.AddCmd(&cluster);
+
+    cli::Cmd blur {};
+    CmdBlurInit(&blur);
+    app.AddCmd(&blur);
 
     return app.Run(argc, argv);
 }
