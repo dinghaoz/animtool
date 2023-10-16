@@ -144,4 +144,6 @@ int AnimToolBlur(
     };
 
     check(DecRun(image_path, &ctx, kRunCallback));
+
+    return 1;
 }
