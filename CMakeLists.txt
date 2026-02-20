@@ -90,9 +90,9 @@ CPMAddPackage(
 
 CPMAddPackage(
         NAME png
-        VERSION 1.6.39
-        URL "https://download.sourceforge.net/libpng/libpng-1.6.39.tar.gz"
-        URL_HASH SHA256=af4fb7f260f839919e5958e5ab01a275d4fe436d45442a36ee62f73e5beb75ba
+        VERSION 1.6.55
+        URL "https://download.sourceforge.net/libpng/libpng-1.6.55.tar.gz"
+        URL_HASH SHA256=4b0abab6d219e95690ebe4db7fc9aa95f4006c83baaa022373c0c8442271283d
         OPTIONS
         "PNG_EXECUTABLES OFF"
         "PNG_TESTS OFF"

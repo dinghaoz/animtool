@@ -12,7 +12,12 @@ echo "EFFECTIVE_PLATFORM_NAME $EFFECTIVE_PLATFORM_NAME."
 PLATFORM=OS64
 if [[ $EFFECTIVE_PLATFORM_NAME == "-iphonesimulator" ]]
 then
-  PLATFORM=SIMULATOR64
+  if [[ $ARCHS == *"arm64"* ]]
+  then
+    PLATFORM=SIMULATORARM64
+  else
+    PLATFORM=SIMULATOR64
+  fi
 fi
 
 PATH=/usr/local/bin/:/opt/homebrew/bin/:$PATH
@@ -26,7 +31,7 @@ fi
 
 mkdir -p ${TARGET_BUILD_DIR}/cmake
 mkdir -p ${TARGET_BUILD_DIR}/cmake-products
-cmake -DBUILD_ANIMTOOL_EXECUTABLE=OFF -S ${PROJECT_DIR}/.. -B ${TARGET_BUILD_DIR}/cmake -GXcode -DCMAKE_TOOLCHAIN_FILE=${PROJECT_DIR}/../cmake/ios.toolchain.cmake -DPLATFORM=$PLATFORM -DENABLE_BITCODE=FALSE
+cmake -DBUILD_ANIMTOOL_EXECUTABLE=OFF -S ${PROJECT_DIR}/.. -B ${TARGET_BUILD_DIR}/cmake -GXcode -DCMAKE_TOOLCHAIN_FILE=${PROJECT_DIR}/../cmake/ios.toolchain.cmake -DPLATFORM=$PLATFORM -DDEPLOYMENT_TARGET=12.0 -DENABLE_BITCODE=FALSE
 cmake --build ${TARGET_BUILD_DIR}/cmake --config ${CONFIGURATION}
 
 LIB_PATH_PARTS=("" /_deps/webp-build /_deps/jpeg-build /_deps/png-build)
