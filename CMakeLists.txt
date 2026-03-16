@@ -27,7 +27,8 @@ CPMAddPackage(NAME webp
 
 CPMAddPackage(NAME gif
         VERSION 5.2.1
-        URL https://onboardcloud.dl.sourceforge.net/project/giflib/giflib-5.2.1.tar.gz
+        URL https://sourceforge.net/projects/giflib/files/giflib-5.2.1.tar.gz/download
+        DOWNLOAD_NAME giflib-5.2.1.tar.gz
         URL_HASH SHA1=c3f774dcbdf26afded7788979c8081d33c6426dc
         )
 
